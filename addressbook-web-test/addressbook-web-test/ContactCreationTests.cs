@@ -7,16 +7,16 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Support.UI;
 
-namespace WebAddressbookTests
+namespace SeleniumTests
 {
     [TestFixture]
-    public class GroupCreationTests
+    public class ContactCreationTests
     {
         private IWebDriver driver;
         private StringBuilder verificationErrors;
         private string baseURL;
         private bool acceptNextAlert = true;
-        
+
         [SetUp]
         public void SetupTest()
         {
@@ -24,7 +24,7 @@ namespace WebAddressbookTests
             baseURL = "http://192.168.42.128/addressbook";
             verificationErrors = new StringBuilder();
         }
-        
+
         [TearDown]
         public void TeardownTest()
         {
@@ -38,59 +38,30 @@ namespace WebAddressbookTests
             }
             Assert.AreEqual("", verificationErrors.ToString());
         }
-        
+
         [Test]
-        public void GroupCreationTest()
+        public void TheUntitledTestCaseTest()
         {
             OpenHomePage();
             Login(new AccuntData("admin", "secret"));
-            GoToGroupsPage();
-            InitGroupCreation();
-            GroupData group = new GroupData("group name")
-            {
-                Header = "group header",
-                Footer = "group footer"
-            };
-
-            FillGroupForm(group);
-            SubmitGroupCreation();
-            ReturnToGroupsPage();
-            Logout();
-        }
-
-        private void Logout()
-        {
+            driver.FindElement(By.XPath("//input[@value='Login']")).Click();
+            driver.FindElement(By.LinkText("add new")).Click();
+            driver.FindElement(By.Name("firstname")).Click();
+            driver.FindElement(By.Name("firstname")).Clear();
+            driver.FindElement(By.Name("firstname")).SendKeys("Aeander");
+            driver.FindElement(By.Name("middlename")).Clear();
+            driver.FindElement(By.Name("middlename")).SendKeys("Vukov");
+            driver.FindElement(By.Name("new_group")).Click();
+            driver.FindElement(By.XPath("//option[@value='[none]']")).Click();
+            driver.FindElement(By.Name("theform")).Click();
+            driver.FindElement(By.XPath("(//input[@name='submit'])[2]")).Click();
+            driver.FindElement(By.LinkText("home page")).Click();
             driver.FindElement(By.LinkText("Logout")).Click();
         }
 
-        private void ReturnToGroupsPage()
+        private void OpenHomePage()
         {
-            driver.FindElement(By.LinkText("group page")).Click();
-        }
-
-        private void SubmitGroupCreation()
-        {
-            driver.FindElement(By.Name("submit")).Click();
-        }
-
-        private void FillGroupForm(GroupData group)
-        {
-            driver.FindElement(By.Name("group_name")).Clear();
-            driver.FindElement(By.Name("group_name")).SendKeys(group.Name);
-            driver.FindElement(By.Name("group_header")).Clear();
-            driver.FindElement(By.Name("group_header")).SendKeys(group.Header);
-            driver.FindElement(By.Name("group_footer")).Clear();
-            driver.FindElement(By.Name("group_footer")).SendKeys(group.Footer);
-        }
-
-        private void InitGroupCreation()
-        {
-            driver.FindElement(By.Name("new")).Click();
-        }
-
-        private void GoToGroupsPage()
-        {
-            driver.FindElement(By.LinkText("groups")).Click();
+            driver.Navigate().GoToUrl(baseURL);
         }
 
         private void Login(AccuntData account)
@@ -101,12 +72,6 @@ namespace WebAddressbookTests
             driver.FindElement(By.Name("pass")).SendKeys(account.Password);
             driver.FindElement(By.XPath("//input[@value='Login']")).Click();
         }
-
-        private void OpenHomePage()
-        {
-            driver.Navigate().GoToUrl(baseURL);
-        }
-
         private bool IsElementPresent(By by)
         {
             try
@@ -119,7 +84,7 @@ namespace WebAddressbookTests
                 return false;
             }
         }
-        
+
         private bool IsAlertPresent()
         {
             try
@@ -132,18 +97,25 @@ namespace WebAddressbookTests
                 return false;
             }
         }
-        
-        private string CloseAlertAndGetItsText() {
-            try {
+
+        private string CloseAlertAndGetItsText()
+        {
+            try
+            {
                 IAlert alert = driver.SwitchTo().Alert();
                 string alertText = alert.Text;
-                if (acceptNextAlert) {
+                if (acceptNextAlert)
+                {
                     alert.Accept();
-                } else {
+                }
+                else
+                {
                     alert.Dismiss();
                 }
                 return alertText;
-            } finally {
+            }
+            finally
+            {
                 acceptNextAlert = true;
             }
         }
