@@ -7,7 +7,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Support.UI;
 
-namespace SeleniumTests
+namespace WebAddressbookTests
 {
     [TestFixture]
     public class ContactCreationTests
@@ -42,36 +42,43 @@ namespace SeleniumTests
         [Test]
         public void TheUntitledTestCaseTest()
         {
-            OpenHomePage();
-            Login(new AccuntData("admin", "secret"));
-            driver.FindElement(By.XPath("//input[@value='Login']")).Click();
-            driver.FindElement(By.LinkText("add new")).Click();
+            SharedSteps.OpenHomePage(driver, baseURL);
+            SharedSteps.Login(driver, new AccuntData("admin", "secret"));
+            GoToNewContactPage();
+            FillContactForm(new ContactData("Alexander", "Vukolov", "Valerevich"));
+            SubmitContactCreation();
+            ReturnToContactPage();
+            SharedSteps.Logout(driver);
+        }
+
+        private void ReturnToContactPage()
+        {
+            driver.FindElement(By.LinkText("home page")).Click();
+        }
+
+        private void SubmitContactCreation()
+        {
+            driver.FindElement(By.XPath("(//input[@name='submit'])[2]")).Click();
+        }
+
+        private void FillContactForm(ContactData contact)
+        {
             driver.FindElement(By.Name("firstname")).Click();
             driver.FindElement(By.Name("firstname")).Clear();
-            driver.FindElement(By.Name("firstname")).SendKeys("Aeander");
+            driver.FindElement(By.Name("firstname")).SendKeys(contact.FirstName);
             driver.FindElement(By.Name("middlename")).Clear();
-            driver.FindElement(By.Name("middlename")).SendKeys("Vukov");
+            driver.FindElement(By.Name("middlename")).SendKeys(contact.MiddleName);
+            driver.FindElement(By.Name("lastname")).Clear();
+            driver.FindElement(By.Name("lastname")).SendKeys(contact.LastName);
             driver.FindElement(By.Name("new_group")).Click();
             driver.FindElement(By.XPath("//option[@value='[none]']")).Click();
-            driver.FindElement(By.Name("theform")).Click();
-            driver.FindElement(By.XPath("(//input[@name='submit'])[2]")).Click();
-            driver.FindElement(By.LinkText("home page")).Click();
-            driver.FindElement(By.LinkText("Logout")).Click();
         }
 
-        private void OpenHomePage()
+        private void GoToNewContactPage()
         {
-            driver.Navigate().GoToUrl(baseURL);
+            driver.FindElement(By.LinkText("add new")).Click();
         }
-
-        private void Login(AccuntData account)
-        {
-            driver.FindElement(By.Name("user")).Clear();
-            driver.FindElement(By.Name("user")).SendKeys(account.Username);
-            driver.FindElement(By.Name("pass")).Clear();
-            driver.FindElement(By.Name("pass")).SendKeys(account.Password);
-            driver.FindElement(By.XPath("//input[@value='Login']")).Click();
-        }
+               
         private bool IsElementPresent(By by)
         {
             try

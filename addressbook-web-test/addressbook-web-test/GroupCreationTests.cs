@@ -42,8 +42,10 @@ namespace WebAddressbookTests
         [Test]
         public void GroupCreationTest()
         {
-            OpenHomePage();
-            Login(new AccuntData("admin", "secret"));
+
+            SharedSteps.OpenHomePage(driver, baseURL);
+            SharedSteps.Login(driver, new AccuntData("admin", "secret"));
+
             GoToGroupsPage();
             InitGroupCreation();
             GroupData group = new GroupData("group name")
@@ -55,13 +57,10 @@ namespace WebAddressbookTests
             FillGroupForm(group);
             SubmitGroupCreation();
             ReturnToGroupsPage();
-            Logout();
+
+            SharedSteps.Logout(driver);
         }
 
-        private void Logout()
-        {
-            driver.FindElement(By.LinkText("Logout")).Click();
-        }
 
         private void ReturnToGroupsPage()
         {
@@ -93,19 +92,6 @@ namespace WebAddressbookTests
             driver.FindElement(By.LinkText("groups")).Click();
         }
 
-        private void Login(AccuntData account)
-        {
-            driver.FindElement(By.Name("user")).Clear();
-            driver.FindElement(By.Name("user")).SendKeys(account.Username);
-            driver.FindElement(By.Name("pass")).Clear();
-            driver.FindElement(By.Name("pass")).SendKeys(account.Password);
-            driver.FindElement(By.XPath("//input[@value='Login']")).Click();
-        }
-
-        private void OpenHomePage()
-        {
-            driver.Navigate().GoToUrl(baseURL);
-        }
 
         private bool IsElementPresent(By by)
         {
