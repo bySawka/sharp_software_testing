@@ -42,13 +42,33 @@ namespace WebAddressbookTests
         [Test]
         public void TheUntitledTestCaseTest()
         {
-            SharedSteps.OpenHomePage(driver, baseURL);
-            SharedSteps.Login(driver, new AccuntData("admin", "secret"));
+            OpenHomePage();
+            Login(new AccuntData("admin", "secret"));
             GoToNewContactPage();
             FillContactForm(new ContactData("Alexander", "Vukolov", "Valerevich"));
             SubmitContactCreation();
             ReturnToContactPage();
-            SharedSteps.Logout(driver);
+            Logout();
+        }
+
+        private void OpenHomePage()
+        {
+            driver.Navigate().GoToUrl(baseURL);
+        }
+
+        private void Logout()
+        {
+            driver.FindElement(By.LinkText("Logout")).Click();
+        }
+
+        
+        private void Login(AccuntData account)
+        {
+            driver.FindElement(By.Name("user")).Clear();
+            driver.FindElement(By.Name("user")).SendKeys(account.Username);
+            driver.FindElement(By.Name("pass")).Clear();
+            driver.FindElement(By.Name("pass")).SendKeys(account.Password);
+            driver.FindElement(By.XPath("//input[@value='Login']")).Click();
         }
 
         private void ReturnToContactPage()

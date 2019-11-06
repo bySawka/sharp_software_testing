@@ -67,7 +67,6 @@
     <Compile Include="ContactData.cs" />
     <Compile Include="Figure.cs" />
     <Compile Include="GroupData.cs" />
-    <Compile Include="SharedSteps.cs" />
     <Compile Include="Square.cs" />
     <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
