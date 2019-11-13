@@ -10,5 +10,5 @@ namespace WebAddressbookTests
         {
             app.Groups.Remove(1);
         }
-     }
+    }
 }

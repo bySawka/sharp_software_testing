@@ -14,7 +14,7 @@ namespace WebAddressbookTests
         protected LoginHelper loginHelper;
         protected NavigationHelper navigationHelper;
         protected GroupHelper groupHelper;
-        protected AccountHelper accountHelper;
+        protected ContactHelper contactHelper;
 
         protected IWebDriver driver;
         protected string baseURL;
@@ -27,7 +27,7 @@ namespace WebAddressbookTests
             loginHelper = new LoginHelper(this);
             navigationHelper = new NavigationHelper(this, baseURL);
             groupHelper = new GroupHelper(this);
-            accountHelper = new AccountHelper(this);
+            contactHelper = new ContactHelper(this);
         }
 
 
@@ -38,8 +38,7 @@ namespace WebAddressbookTests
                 return driver;
             }
         }
-
-
+        
         public void Stop()
         {
             try
@@ -59,6 +58,7 @@ namespace WebAddressbookTests
                 return loginHelper;
             }
         }
+
         public NavigationHelper Navigator
         {
             get
@@ -75,14 +75,13 @@ namespace WebAddressbookTests
             }
         }
 
-        public AccountHelper Accounts
+        public ContactHelper Contacts
         {
             get
             {
-                return accountHelper;
+                return contactHelper;
             }
         }
-
 
     }
 }

@@ -3,13 +3,20 @@
 namespace WebAddressbookTests
 {
     [TestFixture]
-    class ContactCreationTests : TestBase
+    public class ContactCreationTests : TestBase
     {
         [Test]
         public void ContactCreationTest()
         {
             ContactData contact = new ContactData("Alexander", "Vukolov", "Valerevich");
-            app.Accounts.Create(contact);
+            app.Contacts.Create(contact);
+        }
+
+        [Test]
+        public void EmptyContactCreationTest()
+        {
+            ContactData contact = new ContactData("", "", "");
+            app.Contacts.Create(contact);
         }
     }
 }

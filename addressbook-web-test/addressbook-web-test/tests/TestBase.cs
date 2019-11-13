@@ -2,7 +2,7 @@
 
 namespace WebAddressbookTests
 {
-    class TestBase
+    public class TestBase
     {
 
         protected ApplicationManager app;
