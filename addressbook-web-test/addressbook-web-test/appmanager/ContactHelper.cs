@@ -98,8 +98,7 @@ namespace WebAddressbookTests
                
         public ContactHelper InitContactModification(int index)
         {
-            driver.FindElement(By.XPath("(.//*[normalize-space(text()) and normalize-space(.)='import'])[" + index +
-                                            "]/following::img[2]")).Click();
+            driver.FindElement(By.XPath("(//img[@alt='Edit'])[" + index +"]")).Click();
             return this;
         }
         public ContactHelper SubmitContactModification()
