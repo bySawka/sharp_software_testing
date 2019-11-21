@@ -16,7 +16,7 @@ namespace WebAddressbookTests
         }
 
         public ContactHelper Create(ContactData contact)
-        {
+        { 
             manager.Navigator.GoToNewContactPage();
             InitContactCreation();
             FillContactForm(contact);
@@ -52,11 +52,9 @@ namespace WebAddressbookTests
 
         public ContactHelper SearchContact(ContactData removeData)
         {
-            driver.FindElement(By.Name("searchstring")).Click();
-            driver.FindElement(By.Name("searchstring")).Clear();
-            driver.FindElement(By.Name("searchstring")).SendKeys( String.Format("{0} {1}",
-                                                                  removeData.FirstName, 
-                                                                  removeData.LastName));
+            Type(By.Name("searchstring"), String.Format("{0} {1}",
+                                          removeData.FirstName,
+                                          removeData.LastName));
             return this;
         }
 
@@ -86,16 +84,13 @@ namespace WebAddressbookTests
 
         public ContactHelper FillContactForm(ContactData contact)
         {
-            driver.FindElement(By.Name("firstname")).Click();
-            driver.FindElement(By.Name("firstname")).Clear();
-            driver.FindElement(By.Name("firstname")).SendKeys(contact.FirstName);
-            driver.FindElement(By.Name("middlename")).Clear();
-            driver.FindElement(By.Name("middlename")).SendKeys(contact.MiddleName);
-            driver.FindElement(By.Name("lastname")).Clear();
-            driver.FindElement(By.Name("lastname")).SendKeys(contact.LastName);
-             return this;
+            Type(By.Name("firstname"), contact.FirstName);
+            Type(By.Name("middlename"), contact.MiddleName);
+            Type(By.Name("lastname"), contact.LastName);
+
+            return this;
         }
-               
+
         public ContactHelper InitContactModification(int index)
         {
             driver.FindElement(By.XPath("(//img[@alt='Edit'])[" + index +"]")).Click();
