@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 using NUnit.Framework;
 using OpenQA.Selenium;
 
@@ -32,12 +32,12 @@ namespace WebAddressbookTests
             app.Auth.Logout();
 
             // action
-            AccountData account = new AccountData("admin", "123456");
-            app.Auth.Login(account);
 
+             AccountData account = new AccountData("admin", "123456");
+             app.Auth.Login(account);
+            
             // verification
-            bool find = app.Auth.IsLoggedIn(account);
-            Assert.IsFalse(find);
+            Assert.IsFalse(app.Auth.IsLoggedIn(account));
         }
     }
 }

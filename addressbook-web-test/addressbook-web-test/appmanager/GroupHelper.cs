@@ -28,6 +28,8 @@ namespace WebAddressbookTests
         public GroupHelper Modify(int index, GroupData newDate)
         {
             manager.Navigator.GoToGroupsPage();
+            // 
+            AddRecorsdIsNotExist(index);
             SelectGroup(index);
             InitGroupModification();
             FillGroupForm(newDate);
@@ -36,13 +38,41 @@ namespace WebAddressbookTests
             return this;
         }
 
+
         public GroupHelper Remove(int index)
         {
             manager.Navigator.GoToGroupsPage();
+            // 
+            AddRecorsdIsNotExist(index);
             SelectGroup(index);
             RemoveGroup();
             ReturnToGroupsPage();
             return this;
+        }
+
+
+        private GroupHelper AddRecorsdIsNotExist(int Index)
+        {
+            int Count = GetCountOnGroupTable();
+            if (Index > Count)
+            {
+                for (var i = 0; i < Index-Count; i++)
+                {
+                    // создаем
+                    GroupData group = new GroupData("group name")
+                    {
+                        Header = "group header",
+                        Footer = "group footer"
+                    };
+                    Create(group);
+                }
+            }
+            return this;
+        }
+
+        public int GetCountOnGroupTable()
+        {
+            return driver.FindElements(By.Name("selected[]")).ToList().Count;
         }
 
         public GroupHelper ReturnToGroupsPage()

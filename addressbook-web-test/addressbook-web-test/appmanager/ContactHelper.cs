@@ -11,12 +11,12 @@ namespace WebAddressbookTests
 {
     public class ContactHelper : HelperBase
     {
-        public ContactHelper(ApplicationManager manager) :base(manager)
+        public ContactHelper(ApplicationManager manager) : base(manager)
         {
         }
 
         public ContactHelper Create(ContactData contact)
-        { 
+        {
             manager.Navigator.GoToNewContactPage();
             InitContactCreation();
             FillContactForm(contact);
@@ -27,7 +27,15 @@ namespace WebAddressbookTests
 
         public ContactHelper Modify(int index, ContactData newDate)
         {
-            manager.Navigator.GoToHomePage();
+            /*
+             для данного текста стартовой страницей является домашнаяя
+             А т.к для каждого теста открываем стартовую страницу  (см public static ApplicationManager GetInstance() )
+             то следующую вызов лишний:
+             manager.Navigator.GoToHomePage();
+            */
+
+            // проверяем есть ли записи 
+            AddRecorsdIsNotExist(index);
             InitContactModification(index);
             FillContactForm(newDate);
             SubmitContactModification();
@@ -37,11 +45,39 @@ namespace WebAddressbookTests
 
         public ContactHelper Remove(ContactData removeData)
         {
+            /*
+            см коммент для Modify
             manager.Navigator.GoToHomePage();
+            */
             SearchContact(removeData);
+
+            // проверяем есть ли записи
+            AddRecorsdIsNotExist(1, removeData);
+
             SelectAll();
             SubmitRemoveContact();
             return this;
+        }
+
+
+        // метод проверяет, есть ли нужно количество записей контактов
+        public ContactHelper AddRecorsdIsNotExist(int Index, ContactData data = null)
+        {
+            int Count = GetRecordsCount();
+
+            if (Count < Index)
+            {
+                for (var i = 0; i < Count - Index; i++)
+                {
+                    Create(data??new ContactData("Alexander", "Random", "Value"));
+                }
+            }
+            return this;
+        }
+
+        public int GetRecordsCount()
+        {
+            return driver.FindElements(By.Name("selected[]")).ToList().Count;
         }
 
         public ContactHelper SelectAll()

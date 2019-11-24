@@ -27,6 +27,8 @@ namespace WebAddressbookTests
         private ApplicationManager()
         {
             driver = new FirefoxDriver();
+            // объект нужен для того что 
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(1);
             baseURL = "http://192.168.42.128";
             loginHelper = new LoginHelper(this);
             navigationHelper = new NavigationHelper(this, baseURL);
@@ -100,6 +102,5 @@ namespace WebAddressbookTests
                 return contactHelper;
             }
         }
-
     }
 }

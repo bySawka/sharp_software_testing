@@ -8,7 +8,7 @@ namespace WebAddressbookTests
         [Test]
         public void ContactModificationTest()
         {
-            ContactData newDate = new ContactData("New firstname", "New lastname", "New middleName");
+            ContactData newDate = new ContactData("Alexander", "Random", "Value");
             app.Contacts.Modify(1, newDate);
         }
     }

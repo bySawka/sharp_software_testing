@@ -18,6 +18,7 @@ namespace WebAddressbookTests
 
         public void Login(AccountData account)
         {
+            Console.WriteLine("before condition");
             if (IsLoggedIn())
             {
                 if (IsLoggedIn(account))
@@ -26,6 +27,7 @@ namespace WebAddressbookTests
                 }
                 Logout();
             }
+            Console.WriteLine("Afer condition");
 
             Type(By.Name("user"), account.Username);
             Type(By.Name("pass"), account.Password);
@@ -38,11 +40,13 @@ namespace WebAddressbookTests
             if (IsLoggedIn())
             {
                 driver.FindElement(By.LinkText("Logout")).Click();
+                //Ждем загрузку страницы
+                driver.FindElement(By.Name("user")).Click();
             }
         }
         public bool IsLoggedIn()
         {
-                return IsElementPresent(By.Name("logout"));
+            return IsElementPresent(By.Name("logout"));
         }
 
         public bool IsLoggedIn(AccountData account)
