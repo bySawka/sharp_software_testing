@@ -29,7 +29,7 @@ namespace WebAddressbookTests
         {
             manager.Navigator.GoToGroupsPage();
             // 
-            AddRecorsdIsNotExist(index);
+            AddRecorsdIsNotExist();
             SelectGroup(index);
             InitGroupModification();
             FillGroupForm(newDate);
@@ -43,7 +43,7 @@ namespace WebAddressbookTests
         {
             manager.Navigator.GoToGroupsPage();
             // 
-            AddRecorsdIsNotExist(index);
+            AddRecorsdIsNotExist();
             SelectGroup(index);
             RemoveGroup();
             ReturnToGroupsPage();
@@ -51,28 +51,24 @@ namespace WebAddressbookTests
         }
 
 
-        private GroupHelper AddRecorsdIsNotExist(int Index)
+        private GroupHelper AddRecorsdIsNotExist()
         {
-            int Count = GetCountOnGroupTable();
-            if (Index > Count)
+
+            if (!RecordIsExits())
             {
-                for (var i = 0; i < Index-Count; i++)
+                GroupData group = new GroupData("group name")
                 {
-                    // создаем
-                    GroupData group = new GroupData("group name")
-                    {
-                        Header = "group header",
-                        Footer = "group footer"
-                    };
-                    Create(group);
-                }
+                    Header = "group header",
+                    Footer = "group footer"
+                };
+                Create(group);
             }
             return this;
         }
 
-        public int GetCountOnGroupTable()
+        public bool  RecordIsExits()
         {
-            return driver.FindElements(By.Name("selected[]")).ToList().Count;
+            return IsElementPresent(By.Name("selected[]"));
         }
 
         public GroupHelper ReturnToGroupsPage()

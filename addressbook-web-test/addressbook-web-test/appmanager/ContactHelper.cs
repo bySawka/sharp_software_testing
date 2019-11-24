@@ -35,7 +35,7 @@ namespace WebAddressbookTests
             */
 
             // проверяем есть ли записи 
-            AddRecorsdIsNotExist(index);
+            AddRecorsdIsNotExist(new ContactData("Alexander", "Random", "Value"));
             InitContactModification(index);
             FillContactForm(newDate);
             SubmitContactModification();
@@ -52,7 +52,7 @@ namespace WebAddressbookTests
             SearchContact(removeData);
 
             // проверяем есть ли записи
-            AddRecorsdIsNotExist(1, removeData);
+            AddRecorsdIsNotExist(removeData);
 
             SelectAll();
             SubmitRemoveContact();
@@ -61,23 +61,18 @@ namespace WebAddressbookTests
 
 
         // метод проверяет, есть ли нужно количество записей контактов
-        public ContactHelper AddRecorsdIsNotExist(int Index, ContactData data = null)
+        public ContactHelper AddRecorsdIsNotExist(ContactData data)
         {
-            int Count = GetRecordsCount();
-
-            if (Count < Index)
+            if (!RecordIsExits())
             {
-                for (var i = 0; i < Count - Index; i++)
-                {
-                    Create(data??new ContactData("Alexander", "Random", "Value"));
-                }
+                Create(data);
             }
             return this;
         }
 
-        public int GetRecordsCount()
+        public bool RecordIsExits()
         {
-            return driver.FindElements(By.Name("selected[]")).ToList().Count;
+            return IsElementPresent(By.Name("selected[]"));
         }
 
         public ContactHelper SelectAll()
