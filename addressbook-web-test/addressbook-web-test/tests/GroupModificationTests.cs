@@ -9,6 +9,9 @@ namespace WebAddressbookTests
         [Test]
         public void GroupModificationTest()
         {
+            // prepear
+            app.Groups.AddRecorsdIsNotExist();
+
             GroupData newDate = new GroupData("Modify group name")
             {
                 Header = "Modify group header",

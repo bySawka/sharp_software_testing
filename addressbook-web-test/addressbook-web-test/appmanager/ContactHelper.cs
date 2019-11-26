@@ -33,9 +33,6 @@ namespace WebAddressbookTests
              то следующую вызов лишний:
              manager.Navigator.GoToHomePage();
             */
-
-            // проверяем есть ли записи 
-            AddRecorsdIsNotExist(new ContactData("Alexander", "Random", "Value"));
             InitContactModification(index);
             FillContactForm(newDate);
             SubmitContactModification();
@@ -49,11 +46,6 @@ namespace WebAddressbookTests
             см коммент для Modify
             manager.Navigator.GoToHomePage();
             */
-            SearchContact(removeData);
-
-            // проверяем есть ли записи
-            AddRecorsdIsNotExist(removeData);
-
             SelectAll();
             SubmitRemoveContact();
             return this;

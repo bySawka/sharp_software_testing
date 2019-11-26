@@ -28,8 +28,6 @@ namespace WebAddressbookTests
         public GroupHelper Modify(int index, GroupData newDate)
         {
             manager.Navigator.GoToGroupsPage();
-            // 
-            AddRecorsdIsNotExist();
             SelectGroup(index);
             InitGroupModification();
             FillGroupForm(newDate);
@@ -38,11 +36,9 @@ namespace WebAddressbookTests
             return this;
         }
 
-
         public GroupHelper Remove(int index)
         {
             manager.Navigator.GoToGroupsPage();
-            // 
             AddRecorsdIsNotExist();
             SelectGroup(index);
             RemoveGroup();
@@ -50,10 +46,9 @@ namespace WebAddressbookTests
             return this;
         }
 
-
-        private GroupHelper AddRecorsdIsNotExist()
+        public GroupHelper AddRecorsdIsNotExist()
         {
-
+            manager.Navigator.GoToGroupsPage();
             if (!RecordIsExits())
             {
                 GroupData group = new GroupData("group name")

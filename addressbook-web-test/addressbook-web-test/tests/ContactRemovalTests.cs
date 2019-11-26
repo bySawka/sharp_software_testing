@@ -9,7 +9,13 @@ namespace WebAddressbookTests
         public void ContactRemovalTest()
         {
             ContactData removeData = new ContactData("Alexander", "Vukolov", "Valerevich");
-            app.Contacts.Remove(removeData);
+
+            app.Contacts.
+                // prepare
+                SearchContact(removeData).
+                AddRecorsdIsNotExist(removeData).
+                // action
+                Remove(removeData);
         }
      }
 }
