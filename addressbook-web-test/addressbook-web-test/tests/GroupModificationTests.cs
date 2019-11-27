@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using System.Collections.Generic;
 
 namespace WebAddressbookTests
 {
@@ -22,10 +23,20 @@ namespace WebAddressbookTests
                 Footer = "group footer"
             };
 
-            app.Groups.
-                    AddRecorsdIsNotExist(newDate).
-                    // action
-                    Modify(1, ModifyDate);
+            app.Groups.AddRecorsdIsNotExist(newDate);
+             
+            List <GroupData> oldGroups = app.Groups.GetGroupList();
+
+            // action
+            app.Groups.Modify(0, ModifyDate);
+ 
+            List<GroupData> newGroups = app.Groups.GetGroupList();
+
+            oldGroups[0].Name = ModifyDate.Name;
+            oldGroups.Sort();
+            newGroups.Sort();
+
+            Assert.AreEqual(oldGroups, newGroups);
         }
     }
 }

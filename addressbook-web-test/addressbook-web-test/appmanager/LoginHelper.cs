@@ -18,7 +18,6 @@ namespace WebAddressbookTests
 
         public void Login(AccountData account)
         {
-            Console.WriteLine("before condition");
             if (IsLoggedIn())
             {
                 if (IsLoggedIn(account))
@@ -27,7 +26,6 @@ namespace WebAddressbookTests
                 }
                 Logout();
             }
-            Console.WriteLine("Afer condition");
 
             Type(By.Name("user"), account.Username);
             Type(By.Name("pass"), account.Password);

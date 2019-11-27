@@ -33,6 +33,7 @@ namespace WebAddressbookTests
              то следующую вызов лишний:
              manager.Navigator.GoToHomePage();
             */
+
             InitContactModification(index);
             FillContactForm(newDate);
             SubmitContactModification();
@@ -46,11 +47,25 @@ namespace WebAddressbookTests
             см коммент для Modify
             manager.Navigator.GoToHomePage();
             */
+            SearchContact(removeData);
             SelectAll();
             SubmitRemoveContact();
             return this;
         }
 
+        public List<ContactData> GetContatctsList()
+        {
+            List<ContactData> contacts = new List<ContactData>();
+            manager.Navigator.GoToHomePage();
+            ICollection<IWebElement> rows = driver.FindElements(By.Name("entry"));
+            foreach (IWebElement element in rows)
+            {
+                ICollection<IWebElement> td = element.FindElements(By.TagName("td"));
+                contacts.Add(new ContactData(td.ElementAt(2).Text, td.ElementAt(1).Text, ""));
+            }
+
+            return contacts;
+        }
 
         // метод проверяет, есть ли нужно количество записей контактов
         public ContactHelper AddRecorsdIsNotExist(ContactData data)
@@ -64,7 +79,9 @@ namespace WebAddressbookTests
 
         public bool RecordIsExits()
         {
-            return IsElementPresent(By.Name("selected[]"));
+            // проверяем наличие записей по полю "Number of results:"
+            IWebElement element = driver.FindElement(By.Id("search_count"));
+            return element.Text != "0";
         }
 
         public ContactHelper SelectAll()
@@ -130,6 +147,7 @@ namespace WebAddressbookTests
             driver.FindElement(By.LinkText("home page")).Click();
             return this;
         }
+
 
     }
 }
