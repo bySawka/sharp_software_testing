@@ -8,7 +8,17 @@ namespace WebAddressbookTests
         [Test]
         public void GroupRemovalTest()
         {
-            app.Groups.Remove(1);
+            // prepare
+            GroupData newDate = new GroupData("group name")
+            {
+                Header = "group header",
+                Footer = "group footer"
+            };
+
+            app.Groups.
+                AddRecorsdIsNotExist(newDate).
+                // action
+                Remove(1);
         }
     }
 }

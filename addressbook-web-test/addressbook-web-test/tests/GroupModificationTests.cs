@@ -10,15 +10,22 @@ namespace WebAddressbookTests
         public void GroupModificationTest()
         {
             // prepear
-            app.Groups.AddRecorsdIsNotExist();
-
-            GroupData newDate = new GroupData("Modify group name")
+            GroupData ModifyDate = new GroupData("Modify group name")
             {
                 Header = "Modify group header",
                 Footer = "Modify group footer"
             };
 
-            app.Groups.Modify(1, newDate);
+            GroupData newDate = new GroupData("group name")
+            {
+                Header = "group header",
+                Footer = "group footer"
+            };
+
+            app.Groups.
+                    AddRecorsdIsNotExist(newDate).
+                    // action
+                    Modify(1, ModifyDate);
         }
     }
 }

@@ -9,11 +9,13 @@ namespace WebAddressbookTests
         public void ContactModificationTest()
         {
             // prepear
-            app.Contacts.AddRecorsdIsNotExist(new ContactData("Alexander", "Random", "Value"));
+            ContactData modifyDate = new ContactData("FirstName Modify", "LastName Modify", "MiddleName Modify");
+            ContactData newDate = new ContactData("Alexander", "Random", "Value");
 
-            // action
-            ContactData newDate = new ContactData("FirstName Modify", "LastName Modify", "MiddleName Modify");
-            app.Contacts.Modify(1, newDate);
+            app.Contacts.
+                        AddRecorsdIsNotExist(newDate).
+                        // action
+                        Modify(1, newDate);
         }
     }
 }

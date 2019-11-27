@@ -39,23 +39,17 @@ namespace WebAddressbookTests
         public GroupHelper Remove(int index)
         {
             manager.Navigator.GoToGroupsPage();
-            AddRecorsdIsNotExist();
             SelectGroup(index);
             RemoveGroup();
             ReturnToGroupsPage();
             return this;
         }
 
-        public GroupHelper AddRecorsdIsNotExist()
+        public GroupHelper AddRecorsdIsNotExist(GroupData group)
         {
             manager.Navigator.GoToGroupsPage();
             if (!RecordIsExits())
             {
-                GroupData group = new GroupData("group name")
-                {
-                    Header = "group header",
-                    Footer = "group footer"
-                };
                 Create(group);
             }
             return this;
