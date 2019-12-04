@@ -14,6 +14,8 @@ namespace WebAddressbookTests
             ContactData contact = new ContactData("Alexander", "Random", "Value");
             app.Contacts.Create(contact);
 
+            Assert.AreEqual(oldContacts.Count + 1, app.Contacts.GetContactCount());
+
             List<ContactData> newContacts = app.Contacts.GetContatctsList();
 
             oldContacts.Add(contact);
@@ -30,6 +32,8 @@ namespace WebAddressbookTests
 
             ContactData contact = new ContactData("", "", "");
             app.Contacts.Create(contact);
+
+            Assert.AreEqual(oldContacts.Count + 1, app.Contacts.GetContactCount());
 
             List<ContactData> newContacts = app.Contacts.GetContatctsList();
 

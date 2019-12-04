@@ -16,9 +16,13 @@ namespace WebAddressbookTests
             app.Contacts.AddRecorsdIsNotExist(newDate);
 
             List<ContactData> oldContacts = app.Contacts.GetContatctsList();
+            ContactData oldData = oldContacts[0];
 
             // action
             app.Contacts.Modify(1, modifyDate);
+            
+            // количество должно совпадать
+            Assert.AreEqual(oldContacts.Count, app.Contacts.GetContactCount());
 
             List<ContactData> newContacts = app.Contacts.GetContatctsList();
 
@@ -29,6 +33,15 @@ namespace WebAddressbookTests
             newContacts.Sort();
 
             Assert.AreEqual(oldContacts, newContacts);
+
+            foreach (ContactData contact in newContacts)
+            {
+                if (contact.Id == oldData.Id)
+                {
+                    Assert.AreEqual(modifyDate, contact);
+                }
+            }
+
         }
     }
 }

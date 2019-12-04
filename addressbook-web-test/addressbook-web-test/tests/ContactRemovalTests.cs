@@ -17,18 +17,32 @@ namespace WebAddressbookTests
                 AddRecorsdIsNotExist(removeData);
 
             List<ContactData> oldContacts = app.Contacts.GetContatctsList();
-
-            // action
-            app.Contacts.Remove(removeData);
+             // action
+            // считаем кол-во удаляемых элементов
+            int removeCount = app.Contacts.Remove(removeData);
+            // сравниваем кол-во элементов 
+            Assert.AreEqual(oldContacts.Count - removeCount, app.Contacts.GetContactCount());
 
             List<ContactData> newContacts = app.Contacts.GetContatctsList();
 
-            // удаляем записи, который содержатся
-            // т.к на сайте поиск осуществляется like %field%
-            oldContacts.RemoveAll(item=>item.FirstName.Contains(removeData.FirstName)&&
-                                         item.LastName.Contains(removeData.LastName));
+            // создаем список, в котором находятся удаленные елементы
+            List<ContactData> toboRemoved =
+                new List<ContactData> (
+                // удаляем записи, который содержатся
+                // т.к на сайте поиск осуществляется like %field%
+                oldContacts.RemoveAll(item=>item.FirstName.Contains(removeData.FirstName)&&
+                                         item.LastName.Contains(removeData.LastName))
+                );
 
             Assert.AreEqual(oldContacts, newContacts);
+
+            foreach (ContactData group in newContacts)
+            {
+                foreach (ContactData deleted in toboRemoved)
+                {
+                    Assert.AreNotEqual(group.Id, deleted.Id);
+                }
+            }
         }
      }
 }

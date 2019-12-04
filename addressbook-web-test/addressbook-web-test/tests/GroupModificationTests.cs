@@ -26,10 +26,13 @@ namespace WebAddressbookTests
             app.Groups.AddRecorsdIsNotExist(newDate);
              
             List <GroupData> oldGroups = app.Groups.GetGroupList();
-
+            // запиминаем старое значение, которое будем изменять
+            GroupData oldData = oldGroups[0];
             // action
             app.Groups.Modify(0, ModifyDate);
- 
+            // сравниваем кол-во
+            Assert.AreEqual(oldGroups.Count, app.Groups.GetGroupCount());
+
             List<GroupData> newGroups = app.Groups.GetGroupList();
 
             oldGroups[0].Name = ModifyDate.Name;
@@ -37,6 +40,15 @@ namespace WebAddressbookTests
             newGroups.Sort();
 
             Assert.AreEqual(oldGroups, newGroups);
+            // цикл по новому списку
+            foreach(GroupData group in newGroups)
+            {
+                // сравниваем ID в новом списке с ID изменяемого эл-та
+                if (group.Id == oldData.Id)
+                {
+                    Assert.AreEqual(ModifyDate.Name, group.Name);
+                }
+            }
         }
     }
 }
