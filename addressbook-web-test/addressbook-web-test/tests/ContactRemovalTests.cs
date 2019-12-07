@@ -12,9 +12,12 @@ namespace WebAddressbookTests
             ContactData removeData = new ContactData("Modify", "Modify", "Value");
 
             // prepare
-            app.Contacts.
-                SearchContact(removeData).
-                AddRecorsdIsNotExist(removeData);
+            app.Contacts.SearchContact(removeData);
+            
+            if (app.Contacts.GetContactCount() == 0)
+            {
+               app.Contacts.Create(removeData);
+            }
 
             List<ContactData> oldContacts = app.Contacts.GetContatctsList();
              // action
