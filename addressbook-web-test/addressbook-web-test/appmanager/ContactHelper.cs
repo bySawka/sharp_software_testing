@@ -86,6 +86,8 @@ namespace WebAddressbookTests
             return contactCache;
         }
 
+
+
         // метод проверяет, есть ли нужно количество записей контактов
         public ContactHelper AddRecorsdIsNotExist(ContactData data)
         {
@@ -202,6 +204,14 @@ namespace WebAddressbookTests
 
             return this;
         }
+
+        public ContactHelper InitContactViewDetails(int index)
+        {
+            driver.FindElement(By.XPath("(//img[@alt='Details'])[" + (index + 1) + "]")).Click();
+            return this;
+        }
+
+
         public ContactHelper SubmitContactModification()
         {
             driver.FindElement(By.Name("update")).Click();
@@ -234,12 +244,24 @@ namespace WebAddressbookTests
             };
         }
 
-        internal ContactData GetContactInformationFromEditForm(int index)
+        public string GetContactInformationFromDatails(int index)
+        {
+            manager.Navigator.GoToHomePage();
+            InitContactViewDetails(index);
+
+            return  driver.FindElement(By.Id("content")).Text.Replace("\r\n\r\n", "\r\n");
+        }
+
+
+
+        public ContactData GetContactInformationFromEditForm(int index)
         {
             manager.Navigator.GoToHomePage();
             InitContactModification(index);
             string firstname = driver.FindElement(By.Name("firstname")).GetAttribute("value");
             string lastname = driver.FindElement(By.Name("lastname")).GetAttribute("value");
+            string middlename = driver.FindElement(By.Name("middlename")).GetAttribute("value");
+
             string address = driver.FindElement(By.Name("address")).GetAttribute("value");
 
             string email1 = driver.FindElement(By.Name("email")).GetAttribute("value");
@@ -250,7 +272,7 @@ namespace WebAddressbookTests
             string mobilePhone = driver.FindElement(By.Name("mobile")).GetAttribute("value");
             string workPhone = driver.FindElement(By.Name("work")).GetAttribute("value");
 
-            return  new ContactData(firstname, lastname, "")
+            return  new ContactData(firstname, lastname, middlename)
             {
                 Address = address,
                 Email1 = email1,

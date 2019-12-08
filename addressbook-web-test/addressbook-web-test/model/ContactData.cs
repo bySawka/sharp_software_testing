@@ -12,6 +12,7 @@ namespace WebAddressbookTests
 
         private string allPhones;
         private string allEmails;
+        private string details;
 
         public ContactData(string firstName, string lastName, string middleName)
         {
@@ -56,12 +57,12 @@ namespace WebAddressbookTests
                 }
                 else
                 {
-                    return Email1 + Email2 + Email3;
+                    return String.Format("{0}\r\n{1}\r\n{2}", Email1,  Email2, Email3);
                 }
             }
             set
             {
-                allPhones = value;
+                allEmails = value;
             }
         }
         private string CleanUp(string phone)
@@ -74,6 +75,33 @@ namespace WebAddressbookTests
             return Regex.Replace(phone, "[ -()]", "")+"\r\n";
         }
 
+        public string Details
+        {
+            get
+            {
+                if (details != null)
+                {
+                    return details;
+                }
+                else
+                {
+                    string home = HomePhone == "" ? "" : "H: " + HomePhone ;
+                    string mobile = MobilePhone == "" ? "" : "M: " + MobilePhone ;
+                    string work = WorkPhone == "" ? "" : "W: " + WorkPhone ;
+
+                    return String.Format("{0} {1} {2}\r\n{3}\r\n{4}\r\n{5}\r\n{6}\r\n{7}",
+                        FirstName, MiddleName, LastName, Address, home, mobile, work, AllEmails);
+                                        
+                                        
+                                        
+                                       
+                }
+            }
+            set
+            {
+                details = value;
+            }
+        }
 
         public string Email1 { get; set; }
         public string Email2 { get; set; }

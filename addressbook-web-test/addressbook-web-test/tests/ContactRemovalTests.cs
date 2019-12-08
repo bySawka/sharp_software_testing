@@ -9,7 +9,7 @@ namespace WebAddressbookTests
         [Test]
         public void ContactRemovalTest()
         {
-            ContactData removeData = new ContactData("Modify", "Modify", "Value");
+            ContactData removeData = new ContactData("Remove", "Remove", "Remove");
 
             // prepare
             app.Contacts.SearchContact(removeData);
