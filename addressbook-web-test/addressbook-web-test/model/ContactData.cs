@@ -99,12 +99,12 @@ namespace WebAddressbookTests
                     string mobile = MobilePhone == "" ? "" : "M: " + MobilePhone ;
                     string work = WorkPhone == "" ? "" : "W: " + WorkPhone ;
 
-                    return String.Format("{0} {1} {2}\r\n" +  //FirstName  MiddleName LastName 
-                                        "{3}\r\n" +           // Address
+                    return String.Format(@"{0} {1} {2}" +  //FirstName  MiddleName LastName 
+                                        "{3}" +           // Address
                                         "\r\n"+               // Empy line
-                                        "{4}\r\n"+            // phones
-                                        "{5}\r\n" +
-                                        "{6}\r\n" +
+                                        "{4}"+            // phones
+                                        "{5}" +
+                                        "{6}" +
                                         "\r\n" +               // Empy line
                                         "{7}",                // AllEmail
                                         FirstName, MiddleName, LastName, Address, home, mobile, work, AllEmails);

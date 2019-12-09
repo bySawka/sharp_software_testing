@@ -6,43 +6,38 @@ namespace WebAddressbookTests
     [TestFixture]
     public class ContactCreationTests : AuthTestBase
     {
-        [Test]
-        public void ContactCreationTest()
-        {
-            List<ContactData> oldContacts = app.Contacts.GetContatctsList();
 
-            ContactData contact = new ContactData("Alexander", "Random", "Value")
+        public static IEnumerable<ContactData> RandomContactDataProvider()
+        {
+            List<ContactData> contact = new List<ContactData>();
+            for (int i = 0; i < 5; i++)
             {
-                Address = "City: Moscow\r\n" +
-                          "Street: test\r\n" +
-                          "Buid: 9",
-                HomePhone = "+7 (937) 123 12 12",
-                MobilePhone = "+7 (916) 234 23 23",
-                WorkPhone = "+7 (913) 345 67 89",
-                Email1 = "qqqqqq@mail.ru",
-                Email2 = "aaaaaaaaaaaa@gmail.com",
-                Email3 = "eeeeeee@ya.ru"
-            };
+                contact.Add(new ContactData(
+                    GenerateRandomString(20),
+                    GenerateRandomString(50),
+                    GenerateRandomString(20)
+                    )
+                {
+                    Address = GenerateRandomString(300),
+                    HomePhone = GenerateRandomPhoneNumeric(),
+                    MobilePhone = GenerateRandomPhoneNumeric(),
+                    WorkPhone = GenerateRandomPhoneNumeric(),
 
-            app.Contacts.Create(contact);
 
-            Assert.AreEqual(oldContacts.Count + 1, app.Contacts.GetContactCount());
+                    Email1 = GenerateRandomEmail(20, 5),
+                    Email2 = GenerateRandomEmail(20, 5),
+                    Email3 = GenerateRandomEmail(20, 5),
+                });
 
-            List<ContactData> newContacts = app.Contacts.GetContatctsList();
-
-            oldContacts.Add(contact);
-            oldContacts.Sort();
-            newContacts.Sort();
-
-            Assert.AreEqual(oldContacts, newContacts);
+            }
+            return contact;
         }
 
-        [Test]
-        public void EmptyContactCreationTest()
+        [Test, TestCaseSource("RandomContactDataProvider")]
+        public void ContactCreationTest(ContactData contact)
         {
             List<ContactData> oldContacts = app.Contacts.GetContatctsList();
 
-            ContactData contact = new ContactData("", "", "");
             app.Contacts.Create(contact);
 
             Assert.AreEqual(oldContacts.Count + 1, app.Contacts.GetContactCount());
@@ -54,13 +49,6 @@ namespace WebAddressbookTests
             newContacts.Sort();
 
             Assert.AreEqual(oldContacts, newContacts);
-
-        }
-
-        [TearDown]
-        public void DeleteEmptyContacts()
-        {
-            app.Contacts.DeleteEmptyContact();
         }
     }
 }
