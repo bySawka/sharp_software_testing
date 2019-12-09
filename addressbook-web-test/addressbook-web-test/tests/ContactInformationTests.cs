@@ -55,6 +55,7 @@ namespace WebAddressbookTests
 
             string details = app.Contacts.GetContactInformationFromDatails(0);
             ContactData fromForm = app.Contacts.GetContactInformationFromEditForm(0);
+
             Assert.AreEqual(details, fromForm.Details);
         }
 

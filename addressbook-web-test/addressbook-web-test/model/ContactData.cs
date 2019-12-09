@@ -57,13 +57,23 @@ namespace WebAddressbookTests
                 }
                 else
                 {
-                    return String.Format("{0}\r\n{1}\r\n{2}", Email1,  Email2, Email3);
+                    return (CleanUpEmail(Email1) + CleanUpEmail(Email2) + CleanUpEmail(Email3)).Trim();
                 }
             }
             set
             {
                 allEmails = value;
             }
+        }
+
+        private string CleanUpEmail(string email)
+        {
+            if (email == null || email == "")
+            {
+                return null;
+            }
+
+            return email + "\r\n";
         }
         private string CleanUp(string phone)
         {
@@ -89,12 +99,15 @@ namespace WebAddressbookTests
                     string mobile = MobilePhone == "" ? "" : "M: " + MobilePhone ;
                     string work = WorkPhone == "" ? "" : "W: " + WorkPhone ;
 
-                    return String.Format("{0} {1} {2}\r\n{3}\r\n{4}\r\n{5}\r\n{6}\r\n{7}",
-                        FirstName, MiddleName, LastName, Address, home, mobile, work, AllEmails);
-                                        
-                                        
-                                        
-                                       
+                    return String.Format("{0} {1} {2}\r\n" +  //FirstName  MiddleName LastName 
+                                        "{3}\r\n" +           // Address
+                                        "\r\n"+               // Empy line
+                                        "{4}\r\n"+            // phones
+                                        "{5}\r\n" +
+                                        "{6}\r\n" +
+                                        "\r\n" +               // Empy line
+                                        "{7}",                // AllEmail
+                                        FirstName, MiddleName, LastName, Address, home, mobile, work, AllEmails);
                 }
             }
             set

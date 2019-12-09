@@ -249,7 +249,7 @@ namespace WebAddressbookTests
             manager.Navigator.GoToHomePage();
             InitContactViewDetails(index);
 
-            return  driver.FindElement(By.Id("content")).Text.Replace("\r\n\r\n", "\r\n");
+            return  driver.FindElement(By.Id("content")).Text;
         }
 
 
