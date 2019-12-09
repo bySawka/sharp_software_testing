@@ -30,19 +30,16 @@ namespace WebAddressbookTests
 
         public static string GenerateRandomPhoneNumeric()
         {
-
             StringBuilder builder = new StringBuilder("+7 (");
 
             for (var i = 0; i < 3; i++)
             {
-                //коды символов из ASCII
-                builder.Append(Convert.ToChar(32 + rnd.Next(0, 10)));
+                builder.Append(rnd.Next(0, 10).ToString());
             }
             builder.Append(" )");
             for (var i = 0; i < 7; i++)
             {
-                //коды символов из ASCII
-                builder.Append(Convert.ToChar(32 + rnd.Next(0, 10)));
+                builder.Append(rnd.Next(0, 10).ToString());
             }
             return builder.ToString();
         }

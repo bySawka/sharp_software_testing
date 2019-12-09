@@ -30,7 +30,8 @@ namespace WebAddressbookTests
         public string HomePhone { get; set; }
         public string MobilePhone { get; set; }
         public string WorkPhone { get; set; }
-        public string AllPhones {
+        public string AllPhones
+        {
             get
             {
                 if (allPhones != null)
@@ -57,7 +58,7 @@ namespace WebAddressbookTests
                 }
                 else
                 {
-                    return (CleanUpEmail(Email1) + CleanUpEmail(Email2) + CleanUpEmail(Email3)).Trim();
+                    return (CleanUpString(Email1) + CleanUpString(Email2) + CleanUpString(Email3)).Trim();
                 }
             }
             set
@@ -66,14 +67,14 @@ namespace WebAddressbookTests
             }
         }
 
-        private string CleanUpEmail(string email)
+        private string CleanUpString(string value)
         {
-            if (email == null || email == "")
+            if (value == null || value == "")
             {
                 return null;
             }
 
-            return email + "\r\n";
+            return value + "\r\n";
         }
         private string CleanUp(string phone)
         {
@@ -82,7 +83,7 @@ namespace WebAddressbookTests
                 return null;
             }
 
-            return Regex.Replace(phone, "[ -()]", "")+"\r\n";
+            return Regex.Replace(phone, "[ -()]", "") + "\r\n";
         }
 
         public string Details
@@ -95,19 +96,16 @@ namespace WebAddressbookTests
                 }
                 else
                 {
-                    string home = HomePhone == "" ? "" : "H: " + HomePhone ;
-                    string mobile = MobilePhone == "" ? "" : "M: " + MobilePhone ;
-                    string work = WorkPhone == "" ? "" : "W: " + WorkPhone ;
+                    string home = HomePhone == "" ? "" : "H: " + HomePhone;
+                    string mobile = MobilePhone == "" ? "" : "M: " + MobilePhone;
+                    string work = WorkPhone == "" ? "" : "W: " + WorkPhone;
 
-                    return String.Format(@"{0} {1} {2}" +  //FirstName  MiddleName LastName 
-                                        "{3}" +           // Address
-                                        "\r\n"+               // Empy line
-                                        "{4}"+            // phones
-                                        "{5}" +
-                                        "{6}" +
-                                        "\r\n" +               // Empy line
-                                        "{7}",                // AllEmail
-                                        FirstName, MiddleName, LastName, Address, home, mobile, work, AllEmails);
+                    return (CleanUpString(FirstName + " " + MiddleName + " " + LastName) +
+                            CleanUpString(Address) +
+                            "\r\n" +               // Empy line
+                            CleanUpString(home) + CleanUpString(mobile) + CleanUpString(work) +
+                            "\r\n" +               // Empy line
+                            CleanUpString(AllEmails)).Trim();
                 }
             }
             set
@@ -120,7 +118,7 @@ namespace WebAddressbookTests
         public string Email2 { get; set; }
         public string Email3 { get; set; }
 
- 
+
         public int CompareTo(ContactData other)
         {
             if (Object.ReferenceEquals(other, null))
@@ -128,7 +126,7 @@ namespace WebAddressbookTests
                 return 1;
             }
 
-            int compare= LastName.CompareTo(other.LastName);
+            int compare = LastName.CompareTo(other.LastName);
             if (compare == 0)
             {
                 compare = FirstName.CompareTo(other.FirstName);
@@ -149,13 +147,13 @@ namespace WebAddressbookTests
                 return true;
             }
 
-            return FirstName == other.FirstName 
-                && LastName==other.LastName;
+            return FirstName == other.FirstName
+                && LastName == other.LastName;
         }
 
         public override int GetHashCode()
         {
-            return (FirstName + LastName).GetHashCode(); 
+            return (FirstName + LastName).GetHashCode();
         }
 
         public override string ToString()

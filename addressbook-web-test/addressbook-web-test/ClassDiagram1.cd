@@ -11,7 +11,7 @@
       </Path>
     </AssociationLine>
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAACAAAAAAAAA=</HashCode>
+      <HashCode>AAAEAAAAAAAAIAAAAIAAACAAAAAAABAAACAAAAAAAAA=</HashCode>
       <FileName>tests\TestBase.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -21,7 +21,7 @@
   <Class Name="WebAddressbookTests.GroupCreationTests" Collapsed="true">
     <Position X="0.5" Y="6.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAgAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAgAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAI=</HashCode>
       <FileName>tests\GroupCreationTests.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -64,14 +64,14 @@
       </Path>
     </InheritanceLine>
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAASAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAASIAAAAAA=</HashCode>
       <FileName>appmanager\LoginHelper.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="WebAddressbookTests.GroupHelper" Collapsed="true">
     <Position X="5.75" Y="1.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAACIACAAABAAAAAAAAABAAAQAABMEAAAAAAAABAAAA=</HashCode>
+      <HashCode>AAACIACAAABEAAAAAIAABAAAQAABMEAAAAAAAIRAAAA=</HashCode>
       <FileName>appmanager\GroupHelper.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -85,7 +85,7 @@
       </Path>
     </InheritanceLine>
     <TypeIdentifier>
-      <HashCode>AABAIAABACAEAAACAAAABAAAAgAAAEAAAAAYAAAAAgA=</HashCode>
+      <HashCode>QABAICABACAEAAgCAIAAhBAAAgAAAEAEIAAaAAAAAiA=</HashCode>
       <FileName>appmanager\ContactHelper.cs</FileName>
     </TypeIdentifier>
   </Class>
