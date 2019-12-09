@@ -57,7 +57,7 @@ namespace WebAddressbookTests
                 }
                 else
                 {
-                    return (CleanUpEmail(Email1) + CleanUpEmail(Email2) + CleanUpEmail(Email3)).Trim();
+                    return (CleanUpString(Email1) + CleanUpString(Email2) + CleanUpString(Email3)).Trim();
                 }
             }
             set
@@ -66,14 +66,14 @@ namespace WebAddressbookTests
             }
         }
 
-        private string CleanUpEmail(string email)
+        private string CleanUpString(string value)
         {
-            if (email == null || email == "")
+            if (value == null || value == "")
             {
                 return null;
             }
 
-            return email + "\r\n";
+            return value + "\r\n";
         }
         private string CleanUp(string phone)
         {
@@ -99,15 +99,12 @@ namespace WebAddressbookTests
                     string mobile = MobilePhone == "" ? "" : "M: " + MobilePhone ;
                     string work = WorkPhone == "" ? "" : "W: " + WorkPhone ;
 
-                    return String.Format("{0} {1} {2}\r\n" +  //FirstName  MiddleName LastName 
-                                        "{3}\r\n" +           // Address
-                                        "\r\n"+               // Empy line
-                                        "{4}\r\n"+            // phones
-                                        "{5}\r\n" +
-                                        "{6}\r\n" +
-                                        "\r\n" +               // Empy line
-                                        "{7}",                // AllEmail
-                                        FirstName, MiddleName, LastName, Address, home, mobile, work, AllEmails);
+                    return ( CleanUpString(FirstName +" "+ MiddleName + " " + LastName) + 
+                            CleanUpString(Address) +
+                            "\r\n" +               // Empy line
+                            CleanUpString(home)+ CleanUpString(mobile)+ CleanUpString(work)+
+                            "\r\n" +               // Empy line
+                            CleanUpString(AllEmails)).Trim();
                 }
             }
             set
@@ -115,6 +112,8 @@ namespace WebAddressbookTests
                 details = value;
             }
         }
+
+
 
         public string Email1 { get; set; }
         public string Email2 { get; set; }
