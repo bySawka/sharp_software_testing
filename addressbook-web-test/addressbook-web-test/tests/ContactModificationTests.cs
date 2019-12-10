@@ -1,5 +1,7 @@
 ﻿using NUnit.Framework;
+using OpenQA.Selenium;
 using System.Collections.Generic;
+
 
 namespace WebAddressbookTests
 {
@@ -27,6 +29,7 @@ namespace WebAddressbookTests
             app.Contacts.AddRecorsdIsNotExist(newDate);
 
             List<ContactData> oldContacts = app.Contacts.GetContatctsList();
+
             ContactData oldData = oldContacts[0];
 
             // action
@@ -36,10 +39,9 @@ namespace WebAddressbookTests
             Assert.AreEqual(oldContacts.Count, app.Contacts.GetContactCount());
 
             List<ContactData> newContacts = app.Contacts.GetContatctsList();
-
-            oldContacts[0].FirstName = modifyDate.FirstName;
             oldContacts[0].LastName = modifyDate.LastName;
-           
+            oldContacts[0].FirstName = modifyDate.FirstName;
+
             oldContacts.Sort();
             newContacts.Sort();
 

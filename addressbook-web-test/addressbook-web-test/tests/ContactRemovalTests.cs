@@ -14,7 +14,7 @@ namespace WebAddressbookTests
             // prepare
             app.Contacts.SearchContact(removeData);
             
-            if (app.Contacts.GetContactCount() == 0)
+            if (app.Contacts.GetRecordsCount() == 0)
             {
                app.Contacts.Create(removeData);
             }

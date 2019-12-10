@@ -1,5 +1,6 @@
 ﻿using NUnit.Framework;
 using System.Collections.Generic;
+using System.Text;
 
 namespace WebAddressbookTests
 {
@@ -30,7 +31,9 @@ namespace WebAddressbookTests
 
             // verification
             Assert.AreEqual(fromTable, fromForm);
+
             Assert.AreEqual(fromTable.Address, fromForm.Address);
+ 
             Assert.AreEqual(fromTable.AllEmails, fromForm.AllEmails);
             Assert.AreEqual(fromTable.AllPhones, fromForm.AllPhones);
         }
@@ -56,8 +59,6 @@ namespace WebAddressbookTests
             string details = app.Contacts.GetContactInformationFromDatails(0);
             ContactData fromForm = app.Contacts.GetContactInformationFromEditForm(0);
 
-            System.Console.WriteLine(details);
-            System.Console.WriteLine(fromForm.Details);
             Assert.AreEqual(details, fromForm.Details);
         }
 

@@ -43,10 +43,7 @@ namespace WebAddressbookTests
             return this;
         }
 
-        internal int GetContactCount()
-        {
-            return driver.FindElements(By.Name("entry")).Count;
-        }
+
 
         public int Remove(ContactData removeData)
         {
@@ -126,6 +123,11 @@ namespace WebAddressbookTests
             // проверяем наличие записей по полю "Number of results:"
             IWebElement element = driver.FindElement(By.Id("search_count"));
             return Convert.ToInt32(element.Text) ;
+        }
+
+         internal int GetContactCount()
+        {
+            return driver.FindElements(By.Name("entry")).Count;
         }
 
 
