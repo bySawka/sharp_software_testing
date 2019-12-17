@@ -2,6 +2,7 @@
 using System.Text;
 using System.Collections.Generic;
 using NUnit.Framework;
+using System.IO;
 
 namespace WebAddressbookTests
 {
@@ -10,7 +11,7 @@ namespace WebAddressbookTests
     {
         public static Random rnd = new Random();
         protected ApplicationManager app;
-   
+
         [SetUp]
         public void SetupApplicationManager()
         {
@@ -30,7 +31,7 @@ namespace WebAddressbookTests
                 //коды символов из ASCII
                 do {
                     //выводим только читабельные симаолы
-                    c = Convert.ToChar(rnd.Next(32, 66));
+                    c = Convert.ToChar(rnd.Next(32, 127));
                 } while(ignore.Contains(c));
 
                 // если добавляем символ переноса строки, то надо проверить не было ли перед ним пробела

@@ -123,7 +123,7 @@ namespace WebAddressbookTests
             return Convert.ToInt32(element.Text) ;
         }
 
-         internal int GetContactCount()
+        public int GetContactCount()
         {
             return driver.FindElements(By.Name("entry")).Count;
         }

@@ -3,13 +3,13 @@ using NUnit.Framework;
 using System.Collections.Generic;
 using System.Xml.Serialization;
 using Newtonsoft.Json;
+using Excel = Microsoft.Office.Interop.Excel;
 
 namespace WebAddressbookTests
 {
     [TestFixture]
     public class GroupCreationTests : AuthTestBase
     {
-
         public static IEnumerable<GroupData> RandomGroupDataProvider()
         {
             List<GroupData> groups = new List<GroupData>();
@@ -27,7 +27,8 @@ namespace WebAddressbookTests
         public static IEnumerable<GroupData> GroupDataFromCsvFile()
         {
             List<GroupData> groups = new List<GroupData>();
-            string[] lines = File.ReadAllLines(@"groups.csv");
+            string[] lines = File.ReadAllLines(Path.Combine(TestContext.CurrentContext.TestDirectory,
+                                                           @"groups.csv"));
             foreach(string l in lines)
             {
                 string[] parts = l.Split(',');
@@ -44,13 +45,38 @@ namespace WebAddressbookTests
         {
             return (List<GroupData>) 
                     new XmlSerializer(typeof(List<GroupData>))
-                       .Deserialize(new StreamReader(@"groups.xml"));
+                       .Deserialize(new StreamReader(Path.Combine(TestContext.CurrentContext.TestDirectory,
+                                                       @"groups.xml")));
         }
 
         public static IEnumerable<GroupData> GroupDataFromJsonlFile()
         {
             return JsonConvert.DeserializeObject<List<GroupData>>(
-                    File.ReadAllText(@"groups.json"));
+                    File.ReadAllText(Path.Combine(TestContext.CurrentContext.TestDirectory,
+                                                  @"groups.json")));
+        }
+
+        public static IEnumerable<GroupData> GroupDataFromExcelFile()
+        {
+            List<GroupData> groups = new List<GroupData>();
+            Excel.Application app = new Excel.Application();
+            Excel.Workbook wb = app.Workbooks.Open( Path.Combine(TestContext.CurrentContext.TestDirectory, 
+                                                                    @"groups.xlsx"));
+            Excel.Worksheet sheet = wb.ActiveSheet;
+            // прямоуголник, в котором содержатся данные
+            Excel.Range range = sheet.UsedRange;
+            for(int i = 1; i <= range.Rows.Count; i ++)
+            {
+                groups.Add(new GroupData()
+                {
+                    Name = range.Cells[i, 1].Value,
+                    Header = range.Cells[i, 2].Value,
+                    Footer = range.Cells[i, 3].Value
+                }); ;
+            }
+            wb.Close();
+            app.Quit();
+            return groups;
         }
 
         [Test, TestCaseSource("GroupDataFromJsonlFile")]

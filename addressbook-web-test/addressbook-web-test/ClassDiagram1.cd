@@ -4,8 +4,8 @@
     <Position X="0.5" Y="0.5" Width="1.5" />
     <AssociationLine Name="app" Type="WebAddressbookTests.ApplicationManager" FixedFromPoint="true" FixedToPoint="true">
       <Path>
-        <Point X="2" Y="1.211" />
-        <Point X="2.375" Y="1.211" />
+        <Point X="2" Y="1.152" />
+        <Point X="2.375" Y="1.152" />
         <Point X="2.375" Y="0.75" />
         <Point X="3.5" Y="0.75" />
       </Path>
@@ -21,7 +21,7 @@
   <Class Name="WebAddressbookTests.GroupCreationTests" Collapsed="true">
     <Position X="0.5" Y="6.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAgAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAI=</HashCode>
+      <HashCode>AAAAAAgAAAAAAAAAgCAAgAAQAAAAAAAAAAAAAAAAAAo=</HashCode>
       <FileName>tests\GroupCreationTests.cs</FileName>
     </TypeIdentifier>
   </Class>
