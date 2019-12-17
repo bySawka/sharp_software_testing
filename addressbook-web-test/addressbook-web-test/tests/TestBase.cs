@@ -29,7 +29,8 @@ namespace WebAddressbookTests
                 char c;
                 //коды символов из ASCII
                 do {
-                    c = Convert.ToChar(rnd.Next(32, 224));
+                    //выводим только читабельные симаолы
+                    c = Convert.ToChar(rnd.Next(32, 66));
                 } while(ignore.Contains(c));
 
                 // если добавляем символ переноса строки, то надо проверить не было ли перед ним пробела

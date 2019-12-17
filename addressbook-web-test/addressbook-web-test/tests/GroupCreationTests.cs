@@ -2,6 +2,7 @@
 using NUnit.Framework;
 using System.Collections.Generic;
 using System.Xml.Serialization;
+using Newtonsoft.Json;
 
 namespace WebAddressbookTests
 {
@@ -19,7 +20,6 @@ namespace WebAddressbookTests
                     Header = GenerateRandomString(100),
                     Footer = GenerateRandomString(100)
                 });
-
             }
             return groups;
         }
@@ -47,7 +47,13 @@ namespace WebAddressbookTests
                        .Deserialize(new StreamReader(@"groups.xml"));
         }
 
-        [Test, TestCaseSource("GroupDataFromXmlFile")]
+        public static IEnumerable<GroupData> GroupDataFromJsonlFile()
+        {
+            return JsonConvert.DeserializeObject<List<GroupData>>(
+                    File.ReadAllText(@"groups.json"));
+        }
+
+        [Test, TestCaseSource("GroupDataFromJsonlFile")]
         public void GroupCreationTest(GroupData group)
         {
             List<GroupData> oldGroups = app.Groups.GetGroupList();
