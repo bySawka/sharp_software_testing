@@ -1,115 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ArrayOfContactData xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <ContactData>
-    <FirstName>*;</FirstName>
-    <LastName>41=%#;&amp;$0%6@%:!:/.?&amp;$!/ *17.9)@</LastName>
-    <MiddleName>? +!?8-)28,,/!2</MiddleName>
-    <Address>&amp;-47 5,&amp;A/(3! .-10240&amp;#6=/%!3=+?-)79-;*1)$*4 #@7?;.%=)1A2*&amp;57=A?5$8:4$)@?@,(.#@)(1(..=1$=4)*7-@?*?8$&amp;?*%9##983</Address>
-    <HomePhone>+7 (744)7357251</HomePhone>
-    <MobilePhone>+7 (147)0501896</MobilePhone>
-    <WorkPhone>+7 (454)0400172</WorkPhone>
-    <AllPhones>+77447357251
-+71470501896
-+74540400172</AllPhones>
-    <AllEmails>$@73).?
-46&amp;A#46@%.
-:&amp;!@02.($@</AllEmails>
-    <Details>*; ? +!?8-)28,,/!2 41=%#;&amp;$0%6@%:!:/.?&amp;$!/ *17.9)@
-&amp;-47 5,&amp;A/(3! .-10240&amp;#6=/%!3=+?-)79-;*1)$*4 #@7?;.%=)1A2*&amp;57=A?5$8:4$)@?@,(.#@)(1(..=1$=4)*7-@?*?8$&amp;?*%9##983
+    <FirstName>(Dr@l</FirstName>
+    <LastName>Os%{D)QylU8pHBBs,-Y:x5f1oa@</LastName>
+    <MiddleName>jJg#.I</MiddleName>
+    <Address>3v#n!|(M|seOT3^zAV^=iTF1W!+Pm:xAX*5*i9[7]crlZp67((kqA|HA[]H:qV_ayCvI|T0(yF^%aYVeirGdN&amp;~</Address>
+    <HomePhone>+7 (678)4183300</HomePhone>
+    <MobilePhone>+7 (283)9825979</MobilePhone>
+    <WorkPhone>+7 (934)6006591</WorkPhone>
+    <AllPhones>+76784183300
++72839825979
++79346006591</AllPhones>
+    <AllEmails>3sCf)%$7X W!Pf?k|Ys@i.%3.$-
+Gw){}q%0MrKxeA.:f@RD:-.d
+tX )gX_wS@M/vH.yn</AllEmails>
+    <Details>(Dr@l jJg#.I Os%{D)QylU8pHBBs,-Y:x5f1oa@
+3v#n!|(M|seOT3^zAV^=iTF1W!+Pm:xAX*5*i9[7]crlZp67((kqA|HA[]H:qV_ayCvI|T0(yF^%aYVeirGdN&amp;~
 
-H: +7 (744)7357251
-M: +7 (147)0501896
-W: +7 (454)0400172
+H: +7 (678)4183300
+M: +7 (283)9825979
+W: +7 (934)6006591
 
-$@73).?
-46&amp;A#46@%.
-:&amp;!@02.($@</Details>
-    <Email1>$@73).?</Email1>
-    <Email2>46&amp;A#46@%.</Email2>
-    <Email3>:&amp;!@02.($@</Email3>
+3sCf)%$7X W!Pf?k|Ys@i.%3.$-
+Gw){}q%0MrKxeA.:f@RD:-.d
+tX )gX_wS@M/vH.yn</Details>
+    <Email1>3sCf)%$7X W!Pf?k|Ys@i.%3.$-</Email1>
+    <Email2>Gw){}q%0MrKxeA.:f@RD:-.d</Email2>
+    <Email3>tX )gX_wS@M/vH.yn</Email3>
   </ContactData>
   <ContactData>
-    <FirstName>A/* @4!7+</FirstName>
-    <LastName>?/@A6%;+;/,6!7!#?%$</LastName>
-    <MiddleName>5=))&amp; 1=6-+:1</MiddleName>
-    <Address>=+561,;(8 4.2:::*#41$:?13(7?,/11/%2;7/ / ?/#53 0)&amp;;0331$#+,2,3!)*5:).069A/5$?%A@57!33A*3+7#03=+(,/&amp;,:*;$400@-2.?+(8!:A+;3).&amp;,)28:3=-/@0-)?%@9#1*6&amp;!71(%)7&amp;=19!@ ))9(716,((5%,!</Address>
-    <HomePhone>+7 (652)8967258</HomePhone>
-    <MobilePhone>+7 (344)1397022</MobilePhone>
-    <WorkPhone>+7 (448)0954900</WorkPhone>
-    <AllPhones>+76528967258
-+73441397022
-+74480954900</AllPhones>
-    <AllEmails>8@/%*.!6),
-#)&amp;?+#A6@9.-
-=%0@3:?.</AllEmails>
-    <Details>A/* @4!7+ 5=))&amp; 1=6-+:1 ?/@A6%;+;/,6!7!#?%$
-=+561,;(8 4.2:::*#41$:?13(7?,/11/%2;7/ / ?/#53 0)&amp;;0331$#+,2,3!)*5:).069A/5$?%A@57!33A*3+7#03=+(,/&amp;,:*;$400@-2.?+(8!:A+;3).&amp;,)28:3=-/@0-)?%@9#1*6&amp;!71(%)7&amp;=19!@ ))9(716,((5%,!
+    <FirstName>U{</FirstName>
+    <LastName>1=7</LastName>
+    <MiddleName>{S8R[[</MiddleName>
+    <Address>trAV@%HYQ9eZzt2*t3IKoFaqIU{ OyR:-O{8jPSJ_#PaghIB10KN0N,iLY2@mD+-HxwEf^@fN:2V,ZA*a uL,</Address>
+    <HomePhone>+7 (518)6733236</HomePhone>
+    <MobilePhone>+7 (379)2207513</MobilePhone>
+    <WorkPhone>+7 (373)0878213</WorkPhone>
+    <AllPhones>+75186733236
++73792207513
++73730878213</AllPhones>
+    <AllEmails>_OGK@T)x#.5u
+:Ed)r[8D?ge@jle!.+,
+H[6MkDP]W*}%pdhO}fBO@n.ga</AllEmails>
+    <Details>U{ {S8R[[ 1=7
+trAV@%HYQ9eZzt2*t3IKoFaqIU{ OyR:-O{8jPSJ_#PaghIB10KN0N,iLY2@mD+-HxwEf^@fN:2V,ZA*a uL,
 
-H: +7 (652)8967258
-M: +7 (344)1397022
-W: +7 (448)0954900
+H: +7 (518)6733236
+M: +7 (379)2207513
+W: +7 (373)0878213
 
-8@/%*.!6),
-#)&amp;?+#A6@9.-
-=%0@3:?.</Details>
-    <Email1>8@/%*.!6),</Email1>
-    <Email2>#)&amp;?+#A6@9.-</Email2>
-    <Email3>=%0@3:?.</Email3>
-  </ContactData>
-  <ContactData>
-    <FirstName>8</FirstName>
-    <LastName>4@</LastName>
-    <MiddleName>.4=*)A</MiddleName>
-    <Address>@46;A37&amp;61.91;++&amp;?*$!1!+@+3 =0(@#$ .+2-1./;1@#,##5/!($%362.05(%0@35.1?0/91$9;#$A=06@&amp;--A @)A)9?3.1)7#22;,6.?8*+5A92)9&amp;; 2?2%:,;758&amp;,$.-9-/(745 1&amp;8*6*0634 54.$158:-.:?/-3)(?1:7&amp;?!*(2:2.:(*++9!9$:@.8=*,##;9=34.</Address>
-    <HomePhone>+7 (636)8316102</HomePhone>
-    <MobilePhone>+7 (521)7554152</MobilePhone>
-    <WorkPhone>+7 (525)4136454</WorkPhone>
-    <AllPhones>+76368316102
-+75217554152
-+75254136454</AllPhones>
-    <AllEmails>&amp;//@1@4*!7.:%*(&amp;
-?*A0;$8 .@4.A+9
-74!22(9&amp;47@,.,</AllEmails>
-    <Details>8 .4=*)A 4@
-@46;A37&amp;61.91;++&amp;?*$!1!+@+3 =0(@#$ .+2-1./;1@#,##5/!($%362.05(%0@35.1?0/91$9;#$A=06@&amp;--A @)A)9?3.1)7#22;,6.?8*+5A92)9&amp;; 2?2%:,;758&amp;,$.-9-/(745 1&amp;8*6*0634 54.$158:-.:?/-3)(?1:7&amp;?!*(2:2.:(*++9!9$:@.8=*,##;9=34.
-
-H: +7 (636)8316102
-M: +7 (521)7554152
-W: +7 (525)4136454
-
-&amp;//@1@4*!7.:%*(&amp;
-?*A0;$8 .@4.A+9
-74!22(9&amp;47@,.,</Details>
-    <Email1>&amp;//@1@4*!7.:%*(&amp;</Email1>
-    <Email2>?*A0;$8 .@4.A+9</Email2>
-    <Email3>74!22(9&amp;47@,.,</Email3>
-  </ContactData>
-  <ContactData>
-    <FirstName>+</FirstName>
-    <LastName>%04%-%</LastName>
-    <MiddleName>=;-=/.156$-</MiddleName>
-    <Address>).89(354/6-@+/7;8(3:91$?(#)+@@.;:8;.2&amp;00.14200&amp;%A+2 .8A0;917@$29 0!8+&amp;+950908=/:)/%;,1(+5:7;2*A=7/A$.6$):( !?7*#3 5@:-7.5?#&amp;94!-/5=%*?23* *3=5A=)6 +!@84+6 0- 13)$:606:$2A!)*,3.);4+&amp;*2?2,4 5%:,3A;%4*-:36@%A ?&amp;+*%+(%4&amp;?.(-;7&amp;:8./801@=.5 ?*=4 *;@7=%-:-/%#)%094</Address>
-    <HomePhone>+7 (468)2377082</HomePhone>
-    <MobilePhone>+7 (594)3104014</MobilePhone>
-    <WorkPhone>+7 (114)1144283</WorkPhone>
-    <AllPhones>+74682377082
-+75943104014
-+71141144283</AllPhones>
-    <AllEmails>.%7.@&amp; 01&amp;6!?= $A@.$*)3
-*8$*1/-!@7?-2.)-A
-&amp;*.*)918$@$ 5/.47/3</AllEmails>
-    <Details>+ =;-=/.156$- %04%-%
-).89(354/6-@+/7;8(3:91$?(#)+@@.;:8;.2&amp;00.14200&amp;%A+2 .8A0;917@$29 0!8+&amp;+950908=/:)/%;,1(+5:7;2*A=7/A$.6$):( !?7*#3 5@:-7.5?#&amp;94!-/5=%*?23* *3=5A=)6 +!@84+6 0- 13)$:606:$2A!)*,3.);4+&amp;*2?2,4 5%:,3A;%4*-:36@%A ?&amp;+*%+(%4&amp;?.(-;7&amp;:8./801@=.5 ?*=4 *;@7=%-:-/%#)%094
-
-H: +7 (468)2377082
-M: +7 (594)3104014
-W: +7 (114)1144283
-
-.%7.@&amp; 01&amp;6!?= $A@.$*)3
-*8$*1/-!@7?-2.)-A
-&amp;*.*)918$@$ 5/.47/3</Details>
-    <Email1>.%7.@&amp; 01&amp;6!?= $A@.$*)3</Email1>
-    <Email2>*8$*1/-!@7?-2.)-A</Email2>
-    <Email3>&amp;*.*)918$@$ 5/.47/3</Email3>
+_OGK@T)x#.5u
+:Ed)r[8D?ge@jle!.+,
+H[6MkDP]W*}%pdhO}fBO@n.ga</Details>
+    <Email1>_OGK@T)x#.5u</Email1>
+    <Email2>:Ed)r[8D?ge@jle!.+,</Email2>
+    <Email3>H[6MkDP]W*}%pdhO}fBO@n.ga</Email3>
   </ContactData>
 </ArrayOfContactData>
