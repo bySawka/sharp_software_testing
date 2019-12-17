@@ -80,10 +80,8 @@ namespace WebAddressbookTests
                     });
                 }
             }
-            return contactCache;
+            return new List<ContactData>(contactCache);
         }
-
-
 
         // метод проверяет, есть ли нужно количество записей контактов
         public ContactHelper AddRecorsdIsNotExist(ContactData data)
