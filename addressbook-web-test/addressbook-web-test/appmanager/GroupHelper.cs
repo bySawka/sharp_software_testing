@@ -25,8 +25,6 @@ namespace WebAddressbookTests
             return this;
         }
 
-
-
         public GroupHelper Modify(int index, GroupData newDate)
         {
             manager.Navigator.GoToGroupsPage();

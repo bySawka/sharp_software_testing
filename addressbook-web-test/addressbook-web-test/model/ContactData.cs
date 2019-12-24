@@ -41,8 +41,6 @@ namespace WebAddressbookTests
 
         public string MiddleName { get; set; }
 
-
-
         public string Address { get; set; }
         public string HomePhone { get; set; }
         public string MobilePhone { get; set; }
