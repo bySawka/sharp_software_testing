@@ -12,31 +12,31 @@ namespace WebAddressbookTests
             ContactData removeData = new ContactData("Remove", "Remove", "Remove");
 
             // prepare
-            app.Contacts.SearchContact(removeData);
-            
-            if (app.Contacts.GetRecordsCount() == 0)
+            List<ContactData> oldContacts = ContactData.GetAll();
+
+
+            if (oldContacts.Count == 0)
             {
-               app.Contacts.Create(removeData);
+                app.Contacts.Create(removeData);
+                oldContacts.Add(removeData);
             }
 
-            List<ContactData> oldContacts = app.Contacts.GetContatctsList();
-             // action
+
+            // action
             // считаем кол-во удаляемых элементов
+            removeData = oldContacts[0];
             int removeCount = app.Contacts.Remove(removeData);
+          
             // сравниваем кол-во элементов 
             Assert.AreEqual(oldContacts.Count - removeCount, app.Contacts.GetContactCount());
 
-            List<ContactData> newContacts = app.Contacts.GetContatctsList();
+            List<ContactData> newContacts = ContactData.GetAll();
 
             // создаем список, в котором находятся удаленные елементы
             List<ContactData> toboRemoved =
-                new List<ContactData> (
-                // удаляем записи, который содержатся
-                // т.к на сайте поиск осуществляется like %field%
-                oldContacts.RemoveAll(item=>item.FirstName.Contains(removeData.FirstName)&&
-                                         item.LastName.Contains(removeData.LastName))
-                );
+                new List<ContactData> (oldContacts.RemoveAll(item=>item.Equals(removeData)));
 
+           
             Assert.AreEqual(oldContacts, newContacts);
 
             foreach (ContactData group in newContacts)

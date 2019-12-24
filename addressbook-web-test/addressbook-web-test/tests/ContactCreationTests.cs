@@ -7,7 +7,7 @@ using System.IO;
 namespace WebAddressbookTests
 {
     [TestFixture]
-    public class ContactCreationTests : AuthTestBase
+    public class ContactCreationTests : ContactBaseTest
     {
 
         public static IEnumerable<ContactData> RandomContactDataProvider()
@@ -54,13 +54,13 @@ namespace WebAddressbookTests
         [Test, TestCaseSource("ConstactsDataFromJsonlFile")]
         public void ContactCreationTest(ContactData contact)
         {
-            List<ContactData> oldContacts = app.Contacts.GetContatctsList();
+            List<ContactData> oldContacts = ContactData.GetAll();
 
             app.Contacts.Create(contact);
 
             Assert.AreEqual(oldContacts.Count + 1, app.Contacts.GetContactCount());
 
-            List<ContactData> newContacts = app.Contacts.GetContatctsList();
+            List<ContactData> newContacts = ContactData.GetAll();
 
             oldContacts.Add(contact);
             oldContacts.Sort();

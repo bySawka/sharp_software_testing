@@ -6,7 +6,7 @@ using System.Collections.Generic;
 namespace WebAddressbookTests
 {
     [TestFixture]
-    public class ContactModificationTests : AuthTestBase
+    public class ContactModificationTests : ContactBaseTest
     {
         [Test]
         public void ContactModificationTest()
@@ -28,17 +28,18 @@ namespace WebAddressbookTests
 
             app.Contacts.AddRecorsdIsNotExist(newDate);
 
-            List<ContactData> oldContacts = app.Contacts.GetContatctsList();
+            List<ContactData> oldContacts = ContactData.GetAll();
 
             ContactData oldData = oldContacts[0];
 
             // action
-            app.Contacts.Modify(0, modifyDate);
+            app.Contacts.Modify(oldContacts[0], modifyDate);
             
             // количество должно совпадать
             Assert.AreEqual(oldContacts.Count, app.Contacts.GetContactCount());
 
-            List<ContactData> newContacts = app.Contacts.GetContatctsList();
+            List<ContactData> newContacts = ContactData.GetAll();
+
             oldContacts[0].LastName = modifyDate.LastName;
             oldContacts[0].FirstName = modifyDate.FirstName;
 

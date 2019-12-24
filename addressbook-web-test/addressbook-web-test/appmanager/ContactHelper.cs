@@ -11,11 +11,7 @@ namespace WebAddressbookTests
 {
     public class ContactHelper : HelperBase
     {
-        public ContactHelper(ApplicationManager manager) : base(manager)
-        {
-        }
-
-
+        public ContactHelper(ApplicationManager manager) : base(manager) {}
 
         public ContactHelper Create(ContactData contact)
         {
@@ -45,7 +41,7 @@ namespace WebAddressbookTests
 
         public void CommitAddingContactToGroup()
         {
-            driver.FindElement(By.Name("Add")).Click();
+            driver.FindElement(By.Name("add")).Click();
         }
 
         public void SelectGroupToAdd(string name)
@@ -58,7 +54,7 @@ namespace WebAddressbookTests
             new SelectElement(driver.FindElement(By.Name("group"))).SelectByText("[all]");
         }
 
-        public ContactHelper Modify(int index, ContactData newDate)
+        public ContactHelper Modify(int index, ContactData modifyDate)
         {
             /*
              для данного текста стартовой страницей является домашнаяя
@@ -68,13 +64,25 @@ namespace WebAddressbookTests
             */
 
             InitContactModification(index);
-            FillContactForm(newDate);
+            FillContactForm(modifyDate);
             SubmitContactModification();
             ReturnToContactPage();
             return this;
         }
 
 
+        public void Modify(ContactData contactData, ContactData modifyDate)
+        {
+            InitContactModification(contactData.Id);
+            FillContactForm(modifyDate);
+            SubmitContactModification();
+            ReturnToContactPage();
+        }
+
+        private void InitContactModification(string id)
+        {
+            driver.FindElement(By.XPath("//a[@href='edit.php?id="+id+"']")).Click();
+        }
 
         public int Remove(ContactData removeData)
         {
@@ -82,10 +90,7 @@ namespace WebAddressbookTests
             см коммент для Modify
             manager.Navigator.GoToHomePage();
             */
-            SearchContact(removeData);
-
-            int CountOfRemove = GetRecordsCount();
-            SelectAll();
+            int CountOfRemove = SearchContact(removeData);
             SubmitRemoveContact();
             // добавил, чтобы ждать загрузку страницы
             manager.Navigator.GoToHomePage();
@@ -167,13 +172,32 @@ namespace WebAddressbookTests
             return this;
         }
 
-        public ContactHelper SearchContact(ContactData removeData)
+        public int SearchContact(ContactData removeData)
         {
             manager.Navigator.GoToHomePage();
+
+            /* не работает поиск, если в имени и фамилии есть спец символы
             Type(By.Name("searchstring"), String.Format("{0} {1}",
                                           removeData.FirstName,
                                           removeData.LastName));
-            return this;
+
+            */
+            IList<IWebElement> celss = driver.FindElements(By.Name("entry"));
+
+            int count = 0;
+            foreach (IWebElement element in celss)
+            {
+                IList<IWebElement> value = element.FindElements(By.TagName("td"));
+
+                if (value[1].Text == removeData.LastName &&
+                    value[2].Text == removeData.FirstName)
+                {
+                    value[0].Click();
+                    count++;
+                }
+            }
+
+            return count;
         }
 
         public ContactHelper SubmitRemoveContact()

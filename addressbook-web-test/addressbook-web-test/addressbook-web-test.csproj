@@ -88,6 +88,7 @@
     <Compile Include="model\AddressBookDB.cs" />
     <Compile Include="model\GroupContactRelation.cs" />
     <Compile Include="tests\AddingContactToGroupTests.cs" />
+    <Compile Include="tests\ContactBaseTest.cs" />
     <Compile Include="tests\ContactInformationTests.cs" />
     <Compile Include="tests\GroupTestBase.cs" />
     <Compile Include="tests\LoginTests.cs" />
@@ -110,6 +111,7 @@
     <Compile Include="tests\ContactRemovalTests.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
     <None Include="ClassDiagram1.cd" />
     <None Include="contacts.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
