@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace WebAddressbookTests
 {
     [TestFixture]
-    public class GroupModificationTests : AuthTestBase
+    public class GroupModificationTests : GroupTestBase
     {
 
         [Test]
@@ -25,15 +25,16 @@ namespace WebAddressbookTests
 
             app.Groups.AddRecorsdIsNotExist(newDate);
              
-            List <GroupData> oldGroups = app.Groups.GetGroupList();
+            List <GroupData> oldGroups = GroupData.GetAll();
             // запиминаем старое значение, которое будем изменять
             GroupData oldData = oldGroups[0];
             // action
-            app.Groups.Modify(0, ModifyDate);
+            app.Groups.Modify(oldGroups[0], ModifyDate);
+
             // сравниваем кол-во
             Assert.AreEqual(oldGroups.Count, app.Groups.GetGroupCount());
 
-            List<GroupData> newGroups = app.Groups.GetGroupList();
+            List<GroupData> newGroups = GroupData.GetAll();
 
             oldGroups[0].Name = ModifyDate.Name;
             oldGroups.Sort();
