@@ -23,6 +23,55 @@ namespace WebAddressbookTests
             return this;
         }
 
+        public GroupData AddIfNotExistsContactInSelectedGroup(GroupData defaultGroup)
+        {
+           // получаем все контакты
+           List<ContactData> contacts = ContactData.GetAll();
+           // в цикле проверяем, входит ли контакт в какие группы
+           foreach (ContactData contact in contacts)
+            {
+                if (contact.GetGroups().Count > 0)
+                {
+                    // если входит то возвращаем первую группу
+                    return contact.GetGroups()[0];
+                }
+            }
+
+            // если не один контакт не входит не в одну из групп
+
+            // проверяем, если ли вообще записи в контактах
+            if (contacts.Count==0)
+            {
+                // если нет - то создаем
+                Create(
+                    new ContactData
+                    {
+                        FirstName = TestBase.GenerateRandomString(20),
+                        LastName = TestBase.GenerateRandomString(50),
+                        MiddleName = TestBase.GenerateRandomString(20),
+
+                        Address = TestBase.GenerateRandomString(300),
+                        HomePhone = TestBase.GenerateRandomPhoneNumeric(),
+                        MobilePhone = TestBase.GenerateRandomPhoneNumeric(),
+                        WorkPhone = TestBase.GenerateRandomPhoneNumeric(),
+
+
+                        Email1 = TestBase.GenerateRandomEmail(20, 5),
+                        Email2 = TestBase.GenerateRandomEmail(20, 5),
+                        Email3 = TestBase.GenerateRandomEmail(20, 5)
+                    });
+
+
+                // еще раз вызываем  методом GetAll
+                // т.к нам надо потом добавить этот контакт к группе и там мы ищем по ID
+                // который мы можем получить по бд
+                contacts = ContactData.GetAll();
+            }
+            // добавляем контакт в группу
+            AddContactToGroup(contacts[0], defaultGroup);
+            return defaultGroup;
+        }
+
         internal void RemovingContactFromGroup(ContactData contact, GroupData group)
         {
             manager.Navigator.GoToHomePage();

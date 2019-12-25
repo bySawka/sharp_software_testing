@@ -11,19 +11,16 @@ namespace WebAddressbookTests
         [Test]
         public void RemovingContactFromGroupTest()
         {
+            // prepare
             List<GroupData> groups = GroupData.GetAll();
-            List<ContactData> oldList = null;
 
-            int i = -1;
-            do
-            {
-                i++;
-                oldList = groups[i].GetContacts();
-            } while (oldList.Count == 0);
+            GroupData RemovingFromgroup = app.Contacts.AddIfNotExistsContactInSelectedGroup(groups[0]);
+
+            List<ContactData> oldList = RemovingFromgroup.GetContacts(); 
    
-            app.Contacts.RemovingContactFromGroup(oldList[0], groups[i]);
+            app.Contacts.RemovingContactFromGroup(oldList[0], RemovingFromgroup);
 
-            List<ContactData> newList = groups[i].GetContacts();
+            List<ContactData> newList = RemovingFromgroup.GetContacts();
 
             oldList.RemoveAt(0);
 
@@ -31,7 +28,6 @@ namespace WebAddressbookTests
             oldList.Sort();
 
             Assert.AreEqual(oldList, newList);
-
         }
     }
 }

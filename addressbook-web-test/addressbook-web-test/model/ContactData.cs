@@ -185,5 +185,26 @@ namespace WebAddressbookTests
                 return (from c in db.Contacts.Where(x => x.Deprecated == "0000-00-00 00:00:00") select c).ToList();
             }
         }
+
+        public List<GroupData> GetGroups()
+        {
+            using (AddressBookDB db = new AddressBookDB())
+            {
+                return (from g in db.Groups
+                        join gcr in db.GCR
+                            on g.Id equals gcr.GroupID into grroups
+                        from x in grroups.DefaultIfEmpty().
+                        Where(c => c.Deprecated == "0000-00-00 00:00:00")
+                        select g).ToList();
+            }
+
+            /*
+             select groups.*
+             from groups on g
+             left join gcr on 
+             where gcr.id = Contacts.Id
+             */
+        }
+
     }
 }
