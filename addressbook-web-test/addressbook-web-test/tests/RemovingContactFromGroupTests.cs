@@ -12,9 +12,9 @@ namespace WebAddressbookTests
         public void RemovingContactFromGroupTest()
         {
             // prepare
-            List<GroupData> groups = GroupData.GetAll();
+            GroupData groups = app.Groups.FirstOrCreate();
 
-            GroupData RemovingFromgroup = app.Contacts.AddIfNotExistsContactInSelectedGroup(groups[0]);
+            GroupData RemovingFromgroup = app.Contacts.AddIfNotExistsContactInSelectedGroup(groups);
 
             List<ContactData> oldList = RemovingFromgroup.GetContacts(); 
    

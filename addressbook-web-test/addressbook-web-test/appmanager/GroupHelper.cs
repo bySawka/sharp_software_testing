@@ -68,6 +68,17 @@ namespace WebAddressbookTests
             return driver.FindElements(By.CssSelector("span.group")).Count;
         }
 
+        public GroupData FirstOrCreate()
+        {
+            GroupData group = GroupData.GetAll().FirstOrDefault();
+            if (group == null)
+            {
+                group = GroupCreationTests.GroupDataFromJsonlFile().First();
+                Create(group);
+            }
+            return group;
+        }
+
         public GroupHelper AddRecorsdIsNotExist(GroupData group)
         {
             manager.Navigator.GoToGroupsPage();
