@@ -11,10 +11,11 @@ namespace WebAddressbookTests
         [Test]
         public void RemovingContactFromGroupTest()
         {
-            // prepare
-            GroupData groups = app.Groups.FirstOrCreate();
+            // если нет контактов и групп то создаем
+            app.Contacts.CreateIfNotContacts();
+            app.Groups.CreateIfNotGroup();
 
-            GroupData RemovingFromgroup = app.Contacts.AddIfNotExistsContactInSelectedGroup(groups);
+            GroupData RemovingFromgroup = app.Contacts.PrepareRemovingContactFromGroupTest();
 
             List<ContactData> oldList = RemovingFromgroup.GetContacts(); 
    

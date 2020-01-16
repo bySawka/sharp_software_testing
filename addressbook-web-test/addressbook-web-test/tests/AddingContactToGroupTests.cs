@@ -13,10 +13,12 @@ namespace WebAddressbookTests
         public void AddingContactToGroupTest()
         {
             //prepare
+            // если нет контактов и групп то создаем
+            app.Contacts.CreateIfNotContacts();
+            app.Groups.CreateIfNotGroup();
+
             GroupData group = app.Groups.FirstOrCreate();
-
-
-            app.Contacts.AddIfNotExistsContactInSelectedGroup(group);
+            app.Contacts.CheckAndCreateIfNotExistsFreeContacts();
 
             List<ContactData> oldList = group.GetContacts();
             ContactData contact = ContactData.GetAll().Except(oldList).First();

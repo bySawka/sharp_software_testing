@@ -197,8 +197,7 @@ namespace WebAddressbookTests
                         Where(c => c.Deprecated == "0000-00-00 00:00:00")
                         select g).ToList();
             }
-
-            /*
+             /*
              select groups.*
              from groups on g
              left join gcr on 
@@ -206,5 +205,24 @@ namespace WebAddressbookTests
              */
         }
 
+        public static List<ContactData> GetFreeContacts()
+        {
+            using (AddressBookDB db = new AddressBookDB())
+            {
+                return (from c in db.Contacts
+                where !db.GCR.Any(g=>g.ContactID == c.Id && c.Deprecated == "0000-00-00 00:00:00")
+                select c).ToList();
+            }
+        }
+
+        public static List<ContactData> GetContactsInGroup()
+        {
+            using (AddressBookDB db = new AddressBookDB())
+            {
+                return (from c in db.Contacts
+                        where db.GCR.Any(g => g.ContactID == c.Id && c.Deprecated == "0000-00-00 00:00:00")
+                        select c).ToList();
+            }
+        }
     }
 }

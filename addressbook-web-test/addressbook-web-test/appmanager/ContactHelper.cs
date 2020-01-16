@@ -11,7 +11,31 @@ namespace WebAddressbookTests
 {
     public class ContactHelper : HelperBase
     {
-        public ContactHelper(ApplicationManager manager) : base(manager) {}
+        public ContactHelper(ApplicationManager manager) : base(manager) { }
+
+        public void CreateIfNotContacts()
+        {
+            if (ContactData.GetAll() == null)
+            {
+                Create(new ContactData(
+                                TestBase.GenerateRandomString(20),
+                                TestBase.GenerateRandomString(50),
+                                TestBase.GenerateRandomString(20)
+                                    )
+                {
+                    Address = TestBase.GenerateRandomString(300),
+                    HomePhone = TestBase.GenerateRandomPhoneNumeric(),
+                    MobilePhone = TestBase.GenerateRandomPhoneNumeric(),
+                    WorkPhone = TestBase.GenerateRandomPhoneNumeric(),
+
+
+                    Email1 = TestBase.GenerateRandomEmail(20, 5),
+                    Email2 = TestBase.GenerateRandomEmail(20, 5),
+                    Email3 = TestBase.GenerateRandomEmail(20, 5),
+
+                });
+            }
+        }
 
         public ContactHelper Create(ContactData contact)
         {
@@ -22,6 +46,55 @@ namespace WebAddressbookTests
             ReturnToContactPage();
             return this;
         }
+
+        public ContactHelper CheckAndCreateIfNotExistsFreeContacts()
+        {
+            if (ContactData.GetFreeContacts() == null)
+            {
+                Create(new ContactData(
+                                TestBase.GenerateRandomString(20),
+                                TestBase.GenerateRandomString(50),
+                                TestBase.GenerateRandomString(20)
+                                    )
+                {
+                    Address = TestBase.GenerateRandomString(300),
+                    HomePhone = TestBase.GenerateRandomPhoneNumeric(),
+                    MobilePhone = TestBase.GenerateRandomPhoneNumeric(),
+                    WorkPhone = TestBase.GenerateRandomPhoneNumeric(),
+
+
+                    Email1 = TestBase.GenerateRandomEmail(20, 5),
+                    Email2 = TestBase.GenerateRandomEmail(20, 5),
+                    Email3 = TestBase.GenerateRandomEmail(20, 5),
+
+                });
+            }
+            return this;
+        }
+
+        public GroupData PrepareRemovingContactFromGroupTest()
+        {
+
+            GroupData groups;
+            // выбираем первый контакт, который входит хотя бы в 1 группу
+            ContactData contact = ContactData.GetContactsInGroup().FirstOrDefault();
+
+            if (contact != null)
+            {
+                // удаляем контакт из группы
+                groups = contact.GetGroups()[0];
+                RemovingContactFromGroup(contact, groups);
+            }
+            else
+            {
+                // выбираем первую группу из списка групп, если список пустой - добавляем группу
+                groups = manager.Groups.FirstOrCreate();
+                // добавляем в эту группу контакт
+                GroupData RemovingFromgroup = AddIfNotExistsContactInSelectedGroup(groups);
+            }
+            return groups;
+        }
+
 
         public GroupData AddIfNotExistsContactInSelectedGroup(GroupData defaultGroup)
         {
@@ -72,7 +145,7 @@ namespace WebAddressbookTests
             return defaultGroup;
         }
 
-        internal void RemovingContactFromGroup(ContactData contact, GroupData group)
+        public void RemovingContactFromGroup(ContactData contact, GroupData group)
         {
             manager.Navigator.GoToHomePage();
             SelectGroupFilter(group.Name);

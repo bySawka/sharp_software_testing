@@ -25,6 +25,19 @@ namespace WebAddressbookTests
             return this;
         }
 
+        public void CreateIfNotGroup()
+        {
+            if (GroupData.GetAll() == null)
+            {
+                Create(
+                    new GroupData(TestBase.GenerateRandomString(30))
+                    {
+                        Header = TestBase.GenerateRandomString(100),
+                        Footer = TestBase.GenerateRandomString(100)
+                    });
+            }
+        }
+
         public GroupHelper Modify(int index, GroupData newDate)
         {
             manager.Navigator.GoToGroupsPage();
