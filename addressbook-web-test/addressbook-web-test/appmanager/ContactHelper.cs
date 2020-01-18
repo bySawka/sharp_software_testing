@@ -47,6 +47,57 @@ namespace WebAddressbookTests
             return this;
         }
 
+        // метод возвращает пару ContactData-GroupData, у котороых ContactData не входит в группу
+        public Tuple<ContactData, GroupData> GetFreeContactOnGroup()
+        {
+            List<GroupData> allGroups = GroupData.GetAll();
+            List<ContactData> allContacts = ContactData.GetAll();
+
+            ContactData contact;
+            // в цикл у каждой группы проверяем количество принадлежащих контактов
+            foreach (GroupData group in allGroups)
+            {
+                List<ContactData> contactsInCurrentGroup = group.GetContacts();
+                // если количество всех контактов не совпадает с количество контактов, которые связаны с данной группой
+                if (allContacts.Count() > contactsInCurrentGroup.Count())
+                {
+                    // ищем этот контакт
+                    contact= allContacts.Except(contactsInCurrentGroup).First();
+                    return new Tuple<ContactData, GroupData> ( contact, group );
+                }
+            }
+
+            // если не был найден ни 1 свободный контакт - то создаем его
+            contact = new ContactData(
+                                TestBase.GenerateRandomString(20),
+                                TestBase.GenerateRandomString(50),
+                                TestBase.GenerateRandomString(20)
+                                                 )
+                                {
+                                    Address = TestBase.GenerateRandomString(300),
+                                    HomePhone = TestBase.GenerateRandomPhoneNumeric(),
+                                    MobilePhone = TestBase.GenerateRandomPhoneNumeric(),
+                                    WorkPhone = TestBase.GenerateRandomPhoneNumeric(),
+
+
+                                    Email1 = TestBase.GenerateRandomEmail(20, 5),
+                                    Email2 = TestBase.GenerateRandomEmail(20, 5),
+                                    Email3 = TestBase.GenerateRandomEmail(20, 5),
+
+                                };
+
+            Create(contact);
+
+
+            // еще раз вызываем  методом GetAll
+            // т.к нам надо потом добавить этот контакт к группе и там мы ищем по ID
+            // который мы можем получить по бд
+
+            contact = ContactData.GetAll().Except(allContacts).First();
+
+            return new Tuple<ContactData, GroupData>(contact, allGroups[0]);
+        }
+
         public ContactHelper CheckAndCreateIfNotExistsFreeContacts()
         {
             if (ContactData.GetFreeContacts() == null)
@@ -89,61 +140,33 @@ namespace WebAddressbookTests
             {
                 // выбираем первую группу из списка групп, если список пустой - добавляем группу
                 groups = manager.Groups.FirstOrCreate();
+                // создаем контакт
+                Create(
+                          new ContactData
+                          {
+                              FirstName = TestBase.GenerateRandomString(20),
+                              LastName = TestBase.GenerateRandomString(50),
+                              MiddleName = TestBase.GenerateRandomString(20),
+
+                              Address = TestBase.GenerateRandomString(300),
+                              HomePhone = TestBase.GenerateRandomPhoneNumeric(),
+                              MobilePhone = TestBase.GenerateRandomPhoneNumeric(),
+                              WorkPhone = TestBase.GenerateRandomPhoneNumeric(),
+
+
+                              Email1 = TestBase.GenerateRandomEmail(20, 5),
+                              Email2 = TestBase.GenerateRandomEmail(20, 5),
+                              Email3 = TestBase.GenerateRandomEmail(20, 5)
+                          });
+
+                // ищем в базе этот контакт
+                ContactData constact = ContactData.GetAll().Except(groups.GetContacts()).First();
                 // добавляем в эту группу контакт
-                GroupData RemovingFromgroup = AddIfNotExistsContactInSelectedGroup(groups);
+                AddContactToGroup(constact, groups);
             }
             return groups;
         }
 
-
-        public GroupData AddIfNotExistsContactInSelectedGroup(GroupData defaultGroup)
-        {
-           // получаем все контакты
-           List<ContactData> contacts = ContactData.GetAll();
-           // в цикле проверяем, входит ли контакт в какие группы
-           foreach (ContactData contact in contacts)
-            {
-                if (contact.GetGroups().Count > 0)
-                {
-                    // если входит то возвращаем первую группу
-                    return contact.GetGroups()[0];
-                }
-            }
-
-            // если не один контакт не входит не в одну из групп
-
-            // проверяем, если ли вообще записи в контактах
-            if (contacts.Count==0)
-            {
-                // если нет - то создаем
-                Create(
-                    new ContactData
-                    {
-                        FirstName = TestBase.GenerateRandomString(20),
-                        LastName = TestBase.GenerateRandomString(50),
-                        MiddleName = TestBase.GenerateRandomString(20),
-
-                        Address = TestBase.GenerateRandomString(300),
-                        HomePhone = TestBase.GenerateRandomPhoneNumeric(),
-                        MobilePhone = TestBase.GenerateRandomPhoneNumeric(),
-                        WorkPhone = TestBase.GenerateRandomPhoneNumeric(),
-
-
-                        Email1 = TestBase.GenerateRandomEmail(20, 5),
-                        Email2 = TestBase.GenerateRandomEmail(20, 5),
-                        Email3 = TestBase.GenerateRandomEmail(20, 5)
-                    });
-
-
-                // еще раз вызываем  методом GetAll
-                // т.к нам надо потом добавить этот контакт к группе и там мы ищем по ID
-                // который мы можем получить по бд
-                contacts = ContactData.GetAll();
-            }
-            // добавляем контакт в группу
-            AddContactToGroup(contacts[0], defaultGroup);
-            return defaultGroup;
-        }
 
         public void RemovingContactFromGroup(ContactData contact, GroupData group)
         {

@@ -17,12 +17,14 @@ namespace WebAddressbookTests
             app.Contacts.CreateIfNotContacts();
             app.Groups.CreateIfNotGroup();
 
-            GroupData group = app.Groups.FirstOrCreate();
-            app.Contacts.CheckAndCreateIfNotExistsFreeContacts();
+            // ищем пару "Группа"-"Не входищий в эту группу Контакт"
+            // если такого контакта нет - то создаем его
+            Tuple<ContactData, GroupData> pair = app.Contacts.GetFreeContactOnGroup();
 
+            ContactData contact = pair.Item1;
+            GroupData group = pair.Item2;
+            // сформировали список
             List<ContactData> oldList = group.GetContacts();
-            ContactData contact = ContactData.GetAll().Except(oldList).First();
-
             // action
             app.Contacts.AddContactToGroup(contact, group);
 
